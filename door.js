@@ -846,3 +846,31 @@ var Hallway = (function () {
     }
   });
 })();
+
+(function () {
+  "use strict";
+  var zones = [
+    [".knock-zone--high", "img/fist.svg", "touch-fist"],
+    [".knock-zone--low", "img/letter.svg", "touch-letter"],
+    [".handle", "img/key.svg", "touch-key"]
+  ];
+  zones.forEach(function (z) {
+    var el = document.querySelector(z[0]);
+    if (!el) {
+      return;
+    }
+    el.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "touch" && e.pointerType !== "pen") {
+        return;
+      }
+      var img = document.createElement("img");
+      img.src = z[1];
+      img.alt = "";
+      img.className = "touch-icon " + z[2];
+      img.style.left = e.clientX + "px";
+      img.style.top = e.clientY + "px";
+      document.body.appendChild(img);
+      window.setTimeout(function () { img.remove(); }, 900);
+    });
+  });
+})();

@@ -1239,3 +1239,40 @@ body {
 .slot-card {
   display: none;
 }
+
+.touch-icon {
+  position: fixed;
+  z-index: 30;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;               
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+  animation: touch-pop 900ms ease-out forwards;
+}
+.touch-fist   { animation-name: touch-rap; }
+.touch-key    { animation-name: touch-turn; }
+
+@keyframes touch-pop {                      
+  0%   { opacity: 0; transform: scale(0.6); }
+  20%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: translateY(-14px) scale(1); }
+}
+@keyframes touch-rap {                      
+  0%   { opacity: 0; transform: scale(0.7); }
+  12%  { opacity: 1; transform: scale(1) translateX(0); }
+  22%  { transform: translateX(6px); }  32% { transform: translateX(0); }
+  42%  { transform: translateX(6px); }  52% { transform: translateX(0); }
+  62%  { transform: translateX(6px); }  72% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; }
+}
+@keyframes touch-turn {                     
+  0%   { opacity: 0; transform: translateX(-10px) rotate(0); }
+  25%  { opacity: 1; transform: translateX(0) rotate(0); }
+  60%  { transform: rotate(80deg); }
+  80%  { opacity: 1; transform: rotate(80deg); }
+  100% { opacity: 0; transform: rotate(80deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .touch-icon { animation: touch-pop 600ms ease-out forwards; }
+}
