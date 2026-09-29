@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <title>Request for Info · Matchburn LUX</title>
+  <meta name="description" content="Sorry we missed you. How to reach the office at the end of the hall: consultation and technical services, by request.">
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <meta property="og:title" content="Request for Info · Matchburn LUX">
+  <meta property="og:description" content="Sorry we missed you. How to reach the office at the end of the hall: consultation and technical services, by request.">
+  <meta property="og:type" content="website">
+  
+  <meta property="og:image" content="https://matchburnlux.com/img/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../site.css">
+  
+  <script src="../door.js" defer></script>
+</head>
+<body class="page">
+
+  <header class="page-top">
+    <a href="../">Matchburn LUX</a>
+  </header>
+
+  <main>
+    <section id="contact" class="contact-card" aria-labelledby="card-name">
+      <div class="card-columns">
+        <div class="card-col card-col-left">
+          <p class="card-greeting">Thanks for seeking the best.</p>
+          <h1 id="card-name" class="card-name">Matchburn LUX</h1>
+          <p class="card-services">Consultation, Technical &amp; Design Services on request.</p>
+
+          <p class="card-contact">Write to the office:
+            <a href="mailto:ignite@matchburnlux.com">ignite@matchburnlux.com</a></p>
+        </div>
+
+        <div class="card-col card-col-right">
+          
+          <div class="card-message">
+            <label for="rfi-email">Your email</label>
+            <input id="rfi-email" type="email" maxlength="254" autocomplete="email"
+                   inputmode="email" spellcheck="false">
+            <label for="rfi-note">Leave a note for the office</label>
+            <textarea id="rfi-note" rows="3" maxlength="2000"
+                      placeholder="What's the project? Dates, place, what you need."></textarea>
+            <button type="button" id="rfi-send">Leave the note</button>
+            <p class="rfi-hint" aria-live="polite">Opens your own email app, addressed to the office.</p>
+          </div>
+
+          <form class="list-signup" hidden method="post" accept-charset="utf-8" autocomplete="on">
+            <h2 class="list-title">Join the list</h2>
+
+            <label for="list-email">Your email</label>
+            <input id="list-email" type="email" name="email" required
+                   maxlength="254" autocomplete="email" inputmode="email" spellcheck="false">
+
+            <label class="consent">
+              <input id="list-consent" type="checkbox" required>
+              <span>Yes, send me the Matchburn LUX list. I can unsubscribe any time.
+                <a href="../privacy/">Privacy</a></span>
+            </label>
+
+            <div class="hp" aria-hidden="true">
+              <label for="list-website">Leave this empty</label>
+              <input id="list-website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <input type="hidden" name="tag" value="src:contact-page">
+            <input type="hidden" name="tag" value="consent:cv1-2026-09">
+            <input type="hidden" name="embed" value="1">
+
+            <button type="submit" disabled>Join the list</button>
+            <p class="list-note">The list opens soon.</p>
+          </form>
+          
+          <p class="list-soon">The list opens soon.</p>
+        </div>
+      </div>
+
+      <p class="card-privacy">Your note travels by your own email. How we handle it: <a href="../privacy/">Privacy Policy</a>.</p>
+      <img class="card-logo" src="../img/match.png" alt="" width="72" height="58">
+      <img class="card-logo card-logo--flip" src="../img/match.png" alt="" width="72" height="58">
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <ul>
+      <li><a href="../">Home</a></li>
+      <li><a href="../fees/">Fees</a></li>
+      <li><a href="../goods/">The Goods</a></li>
+      <li><a href="./">Contact</a></li>
+      <li><a href="../privacy/">Privacy</a></li>
+    </ul>
+    <p class="fine">&copy; 2006 Matchburn LUX &middot; by appointment only</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Matchburn LUX - SAMPLE site, not launched.
+# Keep every search engine out while these are review samples.
+# At launch (Dawn's plan): replace with
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://matchburnlux.com/sitemap.xml
+
+User-agent: *
+Disallow: /

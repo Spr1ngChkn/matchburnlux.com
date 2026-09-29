@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  
+  <meta name="color-scheme" content="dark">
+  <title>Matchburn LUX</title>
+  <meta name="description" content="Matchburn LUX: a Consulting firm. Conceptual & Creative development; Narrative, Thematic and Style Direction. By Appointment.">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta property="og:title" content="Matchburn LUX: Projects">
+  <meta property="og:description" content="Matchburn LUX: a Consulting firm. Conceptual & Creative development; Narrative, Thematic and Style Direction. By Appointment.">
+  <meta property="og:type" content="website">
+  
+  <meta property="og:image" content="https://matchburnlux.com/img/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="door.css">
+  
+  <script src="door-key.js" defer></script>
+  <script src="door.js" defer></script>
+</head>
+<body class="door-page">
+
+  <button type="button" id="entry-gate" class="entry-gate" autofocus hidden>ignite imagination</button>
+
+  <main>
+
+    <div class="hallway">
+
+      <div class="wainscot" aria-hidden="true"></div>
+      <div class="chair-rail" aria-hidden="true"></div>
+      <div class="baseboard" aria-hidden="true"></div>
+
+      <div class="lamp" aria-hidden="true"></div>
+
+      <p class="knock-notice" role="status" aria-live="polite"></p>
+
+      <section class="door" aria-label="The office door of Matchburn LUX">
+
+        <div class="door-frame">
+
+          <div class="door-slab">
+
+            <div class="glass">
+              
+              <div class="glass-silhouette" aria-hidden="true"></div>
+              
+              <div class="glass-frost" aria-hidden="true"></div>
+
+              <div class="glass-lettering">
+
+                <div class="glass-top">
+                <h1 class="wordmark">
+                  <span class="wordmark-line gold-leaf">Matchburn</span>
+                  <span class="wordmark-line wordmark-line--lux gold-leaf">LUX</span>
+                </h1>
+                  <p class="gold-leaf glass-above">Creative Consultant</p>
+                </div>
+                <hr class="glass-line">
+                
+                <div class="glass-bottom">
+                  <p class="gold-leaf glass-below">Technical Services</p>
+                </div>
+              </div>
+
+              <button type="button" class="knock-zone knock-zone--high"
+                      aria-label="Knock on the upper door" hidden></button>
+            </div>
+
+            <div class="lower-panel">
+              <div class="mail-slot" aria-hidden="true">
+                <div class="slot-card"></div>
+              </div>
+
+              <button type="button" class="knock-zone knock-zone--low"
+                      aria-label="The mail slot: leave a note" hidden></button>
+            </div>
+
+            <div class="handle" aria-hidden="true"></div>
+
+          </div>
+        </div>
+
+        <div class="under-door-floor">
+          <button type="button" class="under-door" aria-label="A brochure slid under the door. Open it." hidden><span>Info</span></button>
+        </div>
+      </section>
+
+      <div class="appointment-plate" hidden>
+        <button type="button" class="appointment-close">Close</button>
+        <p class="appointment-title">By appointment</p>
+        <form class="appointment-form" method="post" accept-charset="utf-8" autocomplete="off">
+          <label for="appointment-password">Password</label>
+          <input id="appointment-password" type="password" name="password"
+                 autocomplete="off" spellcheck="false">
+          <button type="submit">Enter</button>
+        </form>
+        <p class="appointment-refusal" role="status" aria-live="polite"></p>
+      </div>
+
+    </div>
+
+    <section id="brochure" class="note-card door-panel" aria-labelledby="brochure-name">
+      <button type="button" class="panel-close">Close</button>
+      <h2 id="brochure-name" class="note-title" tabindex="-1">Matchburn LUX</h2>
+      
+      <p class="info-line info-lead">A consulting firm.<br>Conceptual &amp; Creative Development.</p>
+      <p class="info-line">Direction &middot; Video Operators &middot; Equipment rental</p>
+      <p class="info-line">By appointment.</p>
+      <p class="info-links">
+        <a href="fees/">Fees</a> &middot;
+        <a href="goods/">The Goods</a> &middot;
+        <a href="#contact">Leave a note</a> &middot;
+        <a href="blog/">The Files</a> &middot;
+        <a href="privacy/">Privacy</a>
+      </p>
+      
+      <p class="info-links info-social">
+        <a href="https://www.instagram.com/matchburnlux/" target="_blank" rel="noopener noreferrer">Instagram</a> &middot;
+        <a href="https://linktr.ee/matchburnlux" target="_blank" rel="noopener noreferrer">Linktree</a>
+      </p>
+    </section>
+
+    <section id="contact" class="contact-card door-panel" aria-labelledby="card-name">
+      <button type="button" class="panel-close panel-x" aria-label="Put the card away">&times;</button>
+      <div class="card-columns">
+        <div class="card-col card-col-left">
+          <p class="card-greeting">Thanks for seeking the best.</p>
+          <h2 id="card-name" class="card-name" tabindex="-1">Matchburn LUX</h2>
+          <p class="card-services">Consultation, Technical &amp; Design Services on request.</p>
+
+          <p class="card-contact">Write to the office:
+            <a href="mailto:ignite@matchburnlux.com">ignite@matchburnlux.com</a></p>
+        </div>
+
+        <div class="card-col card-col-right">
+          
+          <div class="card-message">
+            <label for="rfi-email">Your email</label>
+            <input id="rfi-email" type="email" maxlength="254" autocomplete="email"
+                   inputmode="email" spellcheck="false">
+            <label for="rfi-note">Leave a note for the office</label>
+            <textarea id="rfi-note" rows="3" maxlength="2000"
+                      placeholder="What's the project? Dates, place, what you need."></textarea>
+            <button type="button" id="rfi-send">Leave the note</button>
+            <p class="rfi-hint" aria-live="polite">Opens your own email app, addressed to the office.</p>
+          </div>
+
+          <form class="list-signup" hidden method="post" accept-charset="utf-8" autocomplete="on">
+            <h3 class="list-title">Join the list</h3>
+
+            <label for="list-email">Your email</label>
+            <input id="list-email" type="email" name="email" required
+                   maxlength="254" autocomplete="email" inputmode="email" spellcheck="false">
+
+            <label class="consent">
+              <input id="list-consent" type="checkbox" required>
+              <span>Yes, send me the Matchburn LUX list. I can unsubscribe any time.
+                <a href="privacy/">Privacy</a></span>
+            </label>
+
+            <div class="hp" aria-hidden="true">
+              <label for="list-website">Leave this empty</label>
+              <input id="list-website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <input type="hidden" name="tag" value="src:mail-slot">
+            <input type="hidden" name="tag" value="consent:cv1-2026-09">
+            <input type="hidden" name="embed" value="1">
+
+            <button type="submit" disabled>Join the list</button>
+            <p class="list-note">The list opens soon.</p>
+          </form>
+          
+          <p class="list-soon">The list opens soon.</p>
+        </div>
+      </div>
+
+      <p class="card-privacy">Your note travels by your own email. How we handle it: <a href="privacy/">Privacy Policy</a>.</p>
+      <img class="card-logo" src="img/match.png" alt="" width="115" height="92">
+      <img class="card-logo card-logo--flip" src="img/match.png" alt="" width="115" height="92">
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="fine">&copy; 2006 Matchburn LUX &middot; by appointment only</p>
+    
+    <div class="phonograph-deck">
+      <p class="visually-hidden" id="ticker-live" role="status" aria-live="polite"></p>
+      <div class="ticker-window" hidden>
+        <span class="ticker-text" id="ticker-text" aria-hidden="true"></span>
+      </div>
+      <button type="button" class="deck-btn" id="deck-play" aria-label="Play the phonograph" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 2.5 L13 8 L4 13.5 Z"/></svg></button>
+      <button type="button" class="deck-btn" id="deck-stop" aria-label="Stop the phonograph" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="9" height="9"/></svg></button>
+      <button type="button" class="deck-btn" id="deck-next" aria-label="Next track" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 3 L9 8 L2.5 13 Z"/><rect x="10.5" y="3" width="2.5" height="10"/></svg></button>
+    </div>
+    
+    <button type="button" class="sound-switch" aria-pressed="true" aria-label="Sound on (press to mute)" title="Sound" hidden><span class="sound-lamp" aria-hidden="true"></span></button>
+  </footer>
+
+</body>
+</html>
