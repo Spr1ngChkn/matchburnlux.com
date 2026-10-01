@@ -1093,3 +1093,7 @@ html::after {
   height: 4%;
   background: #140c07;
 }
+
+.job-steps li {
+  margin-bottom: 0.5rem;
+}
