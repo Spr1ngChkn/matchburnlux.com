@@ -11,7 +11,7 @@
     "https://ice5.somafm.com/secretagent-128-mp3"
   ];
   var SONGS = "https://somafm.com/songs/secretagent.json";
-  var VOLUME = 0.35;
+  var VOLUME = 0.25;
   var FADE_MS = 1500;
 
   var playBtn = radio.querySelector(".radio-play");

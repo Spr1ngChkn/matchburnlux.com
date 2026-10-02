@@ -353,7 +353,7 @@ var Hallway = (function () {
     return buf;
   }
 
-  var BEHIND_DOOR_LEVEL = 0.2;
+  var BEHIND_DOOR_LEVEL = 0.15;
   var BEHIND_DOOR_CUTOFF = 1700;
 
   function buildPhonograph() {
@@ -494,14 +494,22 @@ var Hallway = (function () {
   function playVoice(name) {
   }
 
+  var SFX_BOOST = 1.8;
+  function loud(o) {
+    var c = {};
+    for (var k in o) { c[k] = o[k]; }
+    c.gain = Math.min(0.95, (o.gain || 0.2) * SFX_BOOST);
+    return c;
+  }
+
   return {
     unlock: unlock,
     ready: ready,
     toggleMuted: toggleMuted,
     isMuted: function () { return muted; },
-    burst: burst,
-    tone: tone,
-    sweep: sweep,
+    burst: function (o) { return burst(loud(o)); },
+    tone: function (o) { return tone(loud(o)); },
+    sweep: function (o) { return sweep(loud(o)); },
     footsteps: footsteps,
     phonographArrive: phonographArrive,
     playVoice: playVoice,
