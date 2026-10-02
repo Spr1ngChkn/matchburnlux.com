@@ -302,3 +302,10 @@
   background: #120a1e;          
 }
 
+.se-page .knock-notice {
+  background: linear-gradient(160deg, rgba(29, 16, 54, 0.95), rgba(13, 7, 24, 0.95));
+  border: 2px solid var(--se-purple);
+  color: var(--se-cyan);
+  box-shadow: 0 0 1rem rgba(180, 107, 255, 0.45), inset 0 0 0.4rem rgba(57, 230, 255, 0.35);
+  text-shadow: 0 0 0.5rem rgba(57, 230, 255, 0.6);
+}
