@@ -1556,3 +1556,8 @@ body {
   margin: 0 auto calc(var(--u) * 3); 
   filter: drop-shadow(0 0 calc(var(--u) * 1.5) rgba(180, 107, 255, 0.45));
 }
+
+.se-page .door:not(.door-ghost) .glass-lettering,
+.door-ghost:not(.door-ghost--from-left) .glass-lettering {
+  padding-top: calc(var(--u) * 14);
+}
