@@ -24,6 +24,7 @@
     { name: "Mimo", href: "https://getmimo.com/invite/inhibz" },
     { name: "twitch.tv/spr1ngchkn", href: "https://www.twitch.tv/spr1ngchkn" },
     { name: "Discord", href: "https://discord.gg/PkWJ9Hkf4" },
+    { name: "github.com/Spr1ngChkn", href: "https://github.com/Spr1ngChkn" },
     { name: "Buy me a coffee", href: "https://buymeacoffee.com/spr1ngchkn" },
     { name: "Matchburn LUX", href: "../", logo: "../img/match.png", home: true }
   ].filter(function (c) { return c.href; });
