@@ -1,5 +1,9 @@
 
 
+if (window.location.protocol === "http:" && !/^(127\.0\.0\.1|localhost)$/.test(window.location.hostname)) {
+  window.location.replace("https://" + window.location.host + window.location.pathname + window.location.search + window.location.hash);
+}
+
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 var SE_DOOR = document.body && document.body.getAttribute("data-door") === "se";
