@@ -1,0 +1,64 @@
+
+.se-sub {
+  background: #07040d;
+  color: #e6e0ff;
+}
+.se-sub .page-top a { color: #39e6ff; text-shadow: 0 0 0.5rem rgba(57, 230, 255, 0.6); }
+.se-sub .page-top a:hover { color: #9dff3c; }
+.se-sub .sheet {
+  background: linear-gradient(160deg, #1d1036, #0d0718 60%, #160b2a);
+  border: 2px solid #b46bff;
+  box-shadow: 0 0 1.4rem rgba(180, 107, 255, 0.35), 0 1.5rem 3rem rgba(0, 0, 0, 0.6);
+}
+.se-sub .sheet h1 { color: #39e6ff; text-shadow: 0 0 0.6rem rgba(57, 230, 255, 0.6); text-align: center; }
+.se-sub .tagline { color: #9dff3c; text-align: center; }
+.se-sub a { color: #ff8a2a; }
+.se-sub a:hover { color: #39e6ff; }
+.se-sub-logo { display: block; width: 130px; height: auto; margin: 0 auto 0.6rem; }
+.se-sub .product { border-color: rgba(180, 107, 255, 0.6); background: rgba(10, 4, 20, 0.6); }
+.se-sub .price { color: #9dff3c; }
+.se-sub .shop-button { border-color: #39e6ff; color: #39e6ff; background: transparent; }
+.loot-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: 1px dashed rgba(57, 230, 255, 0.5);
+  color: #b46bff;
+  font: bold 3.5rem/1 "Courier New", Courier, monospace;
+  text-shadow: 0 0 1rem rgba(180, 107, 255, 0.8);
+}
+.se-sub .site-footer a { color: #39e6ff; }
+
+.terminal {
+  width: min(52rem, calc(100% - 32px));
+  margin: 1.5rem auto 2.5rem;
+  padding: 1.2rem clamp(0.9rem, 3vw, 1.6rem) 1.6rem;
+  background: #020403;
+  border: 1px solid rgba(57, 230, 255, 0.45);
+  border-radius: 6px;
+  box-shadow: 0 0 1.6rem rgba(57, 230, 255, 0.15), inset 0 0 3rem rgba(0, 255, 120, 0.04);
+  color: #b8ffcf;
+  font: 0.95rem/1.55 "Courier New", Courier, monospace;
+}
+.terminal h1 { margin: 0 0 0.2rem; font-size: 1rem; color: #39e6ff; font-weight: normal; }
+.term-prompt { color: #9dff3c; margin: 0 0 1.2rem; }
+.term-prompt::after { content: "\2588"; margin-left: 0.3em; animation: term-blink 1.1s steps(1) infinite; }
+@keyframes term-blink { 50% { opacity: 0; } }
+.log-entry { margin: 0 0 1.6rem; padding-bottom: 1.2rem; border-bottom: 1px dashed rgba(57, 230, 255, 0.25); }
+.log-head { margin: 0 0 0.5rem; color: #e6e0ff; font-weight: bold; }
+.log-head .ok { color: #9dff3c; }
+.log-entry p, .log-entry li { margin: 0 0 0.6rem; }
+.log-entry ul { margin: 0 0 0.8rem; padding-left: 1.4rem; }
+.log-entry blockquote { margin: 0 0 0.8rem; padding-left: 0.8rem; border-left: 2px solid #b46bff; color: #e6e0ff; }
+.log-stats { color: #39e6ff; }
+.log-gap { margin: 0 0 1rem; color: #ff5a6e; }
+.log-gap .code { font-weight: bold; }
+.terminal a { color: #ff8a2a; }
+@media (prefers-reduced-motion: reduce) { .term-prompt::after { animation: none; } }
+.loot-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));   
+}
+@media (max-width: 30rem) {
+  .loot-grid { grid-template-columns: 1fr; }
+}

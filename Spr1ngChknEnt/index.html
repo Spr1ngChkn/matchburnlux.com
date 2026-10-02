@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; media-src https://*.somafm.com; connect-src https://somafm.com; form-action 'none'; base-uri 'none'; object-src 'none'">
+  
+  <meta name="color-scheme" content="dark">
+  <title>Spr1ngChkn Enterprises</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Spr1ngChkn Enterprises: Game. Tech. Code. Tech services, streaming and builds, down the hall from Matchburn LUX.">
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <meta property="og:title" content="Spr1ngChkn Enterprises">
+  <meta property="og:description" content="Spr1ngChkn Enterprises: Game. Tech. Code. Tech services, streaming and builds, down the hall from Matchburn LUX.">
+  <meta property="og:type" content="website">
+  
+  <meta property="og:image" content="https://matchburnlux.com/img/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="../door.css">
+  <link rel="stylesheet" href="../radio.css">
+  <link rel="stylesheet" href="../se.css">
+  <script src="../door.js" defer></script>
+  <script src="../radio.js" defer></script>
+  <script src="../se.js" defer></script>
+</head>
+<body class="door-page se-page" data-door="se" data-knock-message="No problem, right after this match!">
+
+  <button type="button" id="entry-gate" class="entry-gate" autofocus hidden>Game. Tech. Code.</button>
+
+  <main>
+
+    <div class="hallway">
+
+      <div class="wainscot" aria-hidden="true"></div>
+      <div class="chair-rail" aria-hidden="true"></div>
+      <div class="baseboard" aria-hidden="true"></div>
+
+      <div class="lamp" aria-hidden="true"></div>
+
+      <p class="knock-notice" role="status" aria-live="polite"></p>
+
+      <section class="door" aria-label="The door of Spr1ngChkn Enterprises">
+
+        <div class="door-frame">
+
+          <div class="tv-light" data-channel="0" hidden>
+            
+            <img class="tv-chick" src="../img/se-chick.png" alt="Spr1ngChkn" width="240" height="171">
+            <a class="tv-channel" href="https://www.twitch.tv/spr1ngchkn" target="_blank" rel="noopener noreferrer">
+              <img class="tv-channel-logo" src="../img/match.png" alt="" width="115" height="92" hidden>
+              <span class="tv-channel-name">twitch.tv/spr1ngchkn</span>
+            </a>
+            <p class="tv-powered">Assisted by <a class="tv-powered-name" href="https://www.intel.com/" target="_blank" rel="noopener noreferrer">Intel</a></p>
+          </div>
+
+          <div class="door-slab">
+
+            <div class="glass">
+
+              <div class="tv-glow" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <div class="glass-frost" aria-hidden="true"></div>
+
+              <div class="glass-lettering">
+                <div class="glass-top">
+                  <img class="se-glass-logo" src="../img/se-chick.png" alt="" width="120" height="86">
+                  <h1 class="wordmark">
+                    <span class="wordmark-line gold-leaf se-name">Spr1ngChkn</span>
+                    <span class="gold-leaf se-ent">Enterprises</span>
+                  </h1>
+                </div>
+                <hr class="glass-line">
+                <div class="glass-bottom">
+                  <p class="gold-leaf glass-below se-tagline">Game. Tech. Code.</p>
+                </div>
+              </div>
+
+              <button type="button" class="knock-zone knock-zone--high"
+                      aria-label="Knock on the upper door" hidden></button>
+            </div>
+
+            <div class="lower-panel">
+              <div class="mail-slot" aria-hidden="true">
+                <div class="slot-card"></div>
+              </div>
+
+              <button type="button" class="knock-zone knock-zone--low"
+                      aria-label="The mail slot: leave a note" hidden></button>
+            </div>
+
+            <div class="handle" aria-hidden="true"></div>
+
+          </div>
+        </div>
+
+        <div class="under-door-floor">
+          <button type="button" class="under-door" aria-label="A brochure slid under the door. Open it." hidden><img class="booklet-logo" src="../img/se-chick.png" alt="" width="120" height="86"><span>Info</span></button>
+        </div>
+      </section>
+
+      <div class="appointment-plate" hidden>
+        <button type="button" class="appointment-close">Close</button>
+        <p class="appointment-title">By appointment</p>
+        <form class="appointment-form" method="post" accept-charset="utf-8" autocomplete="off">
+          <label for="appointment-password">Password</label>
+          <input id="appointment-password" type="password" name="password"
+                 autocomplete="off" spellcheck="false">
+          <button type="submit">Enter</button>
+        </form>
+        <p class="appointment-refusal" role="status" aria-live="polite"></p>
+      </div>
+
+    </div>
+
+    <section id="brochure" class="note-card door-panel" aria-labelledby="brochure-name">
+      <button type="button" class="panel-close">Close</button>
+      <img class="info-logo" src="../img/se-chick.png" alt="" width="160" height="114">
+      <h2 id="brochure-name" class="note-title" tabindex="-1">Spr1ngChkn Enterprises</h2>
+      <p class="info-line info-lead">Game. Tech. Code.</p>
+      <p class="info-line">Tech ops &middot; Live streams &middot; Builds</p>
+      <p class="info-links">
+        <a href="goods/">Loot 4 Goblins</a> &middot;
+        <a href="log/">The Log</a> &middot;
+        <a href="../privacy/">Privacy</a>
+      </p>
+      <p class="info-links info-social">
+        <a href="https://www.instagram.com/og_spr1ngchkn/" target="_blank" rel="noopener noreferrer">Instagram</a> &middot;
+        <a href="https://www.twitch.tv/spr1ngchkn" target="_blank" rel="noopener noreferrer">Twitch</a> &middot;
+        <a href="https://discord.gg/PkWJ9Hkf4" target="_blank" rel="noopener noreferrer">Discord</a> &middot;
+        <a href="https://buymeacoffee.com/spr1ngchkn" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+      </p>
+    </section>
+
+    <section id="contact" class="contact-card door-panel" aria-labelledby="card-name">
+      <button type="button" class="panel-close panel-x" aria-label="Close the panel">&times;</button>
+      <div class="card-columns">
+        <div class="card-col card-col-left">
+          <p class="card-greeting"><span class="line">Signal received.</span><span class="line">Welcome to the grid.</span></p>
+          <h2 id="card-name" class="card-name" tabindex="-1">Spr1ngChkn Enterprises</h2>
+          <p class="card-services">Tech ops, live streams and builds, on request.</p>
+
+          <p class="card-contact">Ping the crew:
+            <a href="mailto:spr1ngchkn@matchburnlux.com">spr1ngchkn@matchburnlux.com</a></p>
+        </div>
+
+        <div class="card-col card-col-right">
+          
+          <div class="card-message">
+            <label for="rfi-email">Your comm link (email)</label>
+            <input id="rfi-email" type="email" maxlength="254" autocomplete="email"
+                   inputmode="email" spellcheck="false">
+            <label for="rfi-note">Tell us in chat</label>
+            <textarea id="rfi-note" rows="3" maxlength="2000"
+                      placeholder="What are we building? Rig, stream, code, timeline."></textarea>
+            <button type="button" id="rfi-send" data-to="spr1ngchkn@matchburnlux.com" data-subject="Incoming transmission (Spr1ngChkn Enterprises)" data-empty="Type a line or two first, then transmit." data-sent="Your mail client should open with the transmission ready to send.">Transmit</button>
+            <p class="rfi-hint" aria-live="polite"><span class="line">Opens your own mail client,</span><span class="line">routed to the crew.</span></p>
+          </div>
+
+          <form class="list-signup" hidden method="post" accept-charset="utf-8" autocomplete="on">
+            <h3 class="list-title">Join the list</h3>
+
+            <label for="list-email">Your email</label>
+            <input id="list-email" type="email" name="email" required
+                   maxlength="254" autocomplete="email" inputmode="email" spellcheck="false">
+
+            <label class="consent">
+              <input id="list-consent" type="checkbox" required>
+              <span>Yes, send me the Matchburn LUX list. I can unsubscribe any time.
+                <a href="../privacy/">Privacy</a></span>
+            </label>
+
+            <div class="hp" aria-hidden="true">
+              <label for="list-website">Leave this empty</label>
+              <input id="list-website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <input type="hidden" name="tag" value="src:mail-slot">
+            <input type="hidden" name="tag" value="consent:cv1-2026-09">
+            <input type="hidden" name="embed" value="1">
+
+            <button type="submit" disabled>Join the list</button>
+            <p class="list-note">The list opens soon.</p>
+          </form>
+          
+          <p class="list-soon">The feed goes live soon.</p>
+        </div>
+      </div>
+
+      <p class="card-privacy">Your transmission travels by your own mail client. Data handling: <a href="../privacy/">Privacy Policy</a>.</p>
+      
+      <img class="card-logo se-card-logo" src="../img/se-logo.png" alt="" width="160" height="123">
+      <img class="card-logo card-logo--flip se-card-logo" src="../img/se-logo.png" alt="" width="160" height="123">
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    
+    <div class="radio" role="group" aria-label="Radio: Secret Agent on SomaFM">
+      <span class="radio-dial" aria-hidden="true"></span>
+      <button type="button" class="deck-btn radio-play" aria-label="Tune in"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 2.5 L13 8 L4 13.5 Z"/></svg></button>
+      <button type="button" class="deck-btn radio-stop" aria-label="Turn the radio off" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="9" height="9"/></svg></button>
+      <span class="radio-now" aria-live="polite">Secret Agent, on SomaFM</span>
+      <input type="range" class="radio-volume" min="0" max="1" step="0.05" aria-label="Volume">
+      <a class="radio-credit" href="https://somafm.com/support/" target="_blank" rel="noopener noreferrer" title="SomaFM is listener-supported: donate">via SomaFM</a>
+    </div>
+    <p class="fine">&copy; 2017&ndash;2026 Spr1ngChkn Enterprises &middot; All rights reserved</p>
+    <button type="button" class="sound-switch" aria-pressed="true" aria-label="Sound on (press to mute)" title="Sound" hidden><span class="sound-lamp" aria-hidden="true"></span></button>
+  </footer>
+
+</body>
+</html>

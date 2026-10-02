@@ -2,6 +2,121 @@
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+var SE_DOOR = document.body && document.body.getAttribute("data-door") === "se";
+var DOOR_BASE = (document.currentScript && document.currentScript.src.replace(/door\.js(\?.*)?$/, "")) || "";
+
+function showWalkCue(onWalk, side) {
+  var left = side === "left";
+  var hallway = document.querySelector(".hallway");
+  if (!hallway || hallway.querySelector(left ? ".walk-cue--left" : ".walk-cue:not(.walk-cue--left)")) {
+    return;
+  }
+  var cue = document.createElement("button");
+  cue.type = "button";
+  cue.className = left ? "walk-cue walk-cue--left" : "walk-cue";
+  cue.setAttribute("aria-label", left ? "Walk back up the hall" : "Walk on down the hall");
+  var icon = document.createElement("img");
+  icon.className = "walk-cue-icon";
+  icon.src = DOOR_BASE + (left ? "img/walk-left.svg" : "img/walk.svg");
+  icon.alt = "";
+  cue.appendChild(icon);
+  hallway.appendChild(cue);
+  var gone = false;
+  function go(e) {
+    if (gone) {
+      return;
+    }
+    gone = true;
+    if (e && e.pointerType === "touch") {
+      var img = document.createElement("img");
+      img.src = DOOR_BASE + (left ? "img/walk-left.svg" : "img/walk.svg");
+      img.alt = "";
+      img.className = "touch-icon touch-walk";
+      img.style.left = e.clientX + "px";
+      img.style.top = e.clientY + "px";
+      document.body.appendChild(img);
+      window.setTimeout(function () { img.remove(); }, 900);
+    }
+    cue.classList.add("is-gone");
+    window.setTimeout(function () { cue.remove(); }, 600);
+    onWalk();
+  }
+  cue.addEventListener("pointerup", go);
+  cue.addEventListener("click", function () { go(null); });
+  window.setTimeout(function () { cue.classList.add("is-shown"); }, 50);
+  if (left) {
+    var idleTimer = window.setTimeout(function () { cue.classList.add("is-idle"); }, 3000);
+    cue.addEventListener("pointerenter", function () {
+      window.clearTimeout(idleTimer);
+      cue.classList.remove("is-idle");
+    });
+    cue.addEventListener("pointerleave", function () {
+      idleTimer = window.setTimeout(function () { cue.classList.add("is-idle"); }, 900);
+    });
+    cue.addEventListener("focus", function () { cue.classList.remove("is-idle"); });
+  }
+}
+
+function walkAcross(o) {
+  var walk = Hallway.footsteps(5200) || 5200;
+  Hallway.player.stop();
+  document.dispatchEvent(new CustomEvent("hall-walk"));
+  try { sessionStorage.setItem(o.flag, "1"); } catch (err) {  }
+  var hallway = document.querySelector(".hallway");
+  if (hallway) {
+    hallway.style.setProperty("--walk-ms", walk + "ms");
+    hallway.style.setProperty("--step-ms", "860ms");
+    hallway.style.setProperty("--steps", String(Math.round(walk / 860)));
+    hallway.classList.remove("is-arriving");
+    var realDoor = hallway.querySelector(".door:not(.door-ghost)");
+    if (realDoor && !reduceMotion.matches) {
+      var ghost = realDoor.cloneNode(true);
+      ghost.classList.remove("is-open");
+      ghost.classList.add("door-ghost");
+      if (o.dir === "left") {
+        ghost.classList.add("door-ghost--from-left");
+      }
+      ghost.setAttribute("aria-hidden", "true");
+      ghost.removeAttribute("aria-label");
+      ghost.querySelectorAll("[id]").forEach(function (el) { el.removeAttribute("id"); });
+      ghost.querySelectorAll("button, .glass-silhouette, .under-door-floor, .tv-light, .tv-glow, .slab-edge").forEach(function (el) { el.remove(); });
+      var glass = ghost.querySelector(".glass");
+      var lettering = ghost.querySelector(".glass-lettering");
+      if (lettering) {
+        lettering.innerHTML = o.lettering;
+      }
+      if (o.dir === "right" && glass && !glass.querySelector(".tv-glow")) {
+        var glow = document.createElement("div");
+        glow.className = "tv-glow";
+        glow.innerHTML = "<span></span><span></span><span></span><span></span>";
+        glass.insertBefore(glow, glass.querySelector(".glass-frost"));
+      }
+      if (o.silhouette && glass) {
+        var sil = document.createElement("div");
+        sil.className = "glass-silhouette";
+        glass.insertBefore(sil, glass.firstChild);
+      }
+      ghost.style.left = realDoor.offsetLeft + "px";
+      ghost.style.top = realDoor.offsetTop + "px";
+      ghost.style.width = realDoor.offsetWidth + "px";
+      hallway.appendChild(ghost);
+    }
+    hallway.classList.add(o.dir === "left" ? "is-walking-back" : "is-leaving");
+  }
+  window.setTimeout(function () {
+    window.location.href = o.dest;
+  }, walk + 150);
+}
+
+var SE_GLASS = '<div class="glass-top"><img class="se-glass-logo" src="' + DOOR_BASE + 'img/se-chick.png" alt="">' +
+  '<h1 class="wordmark"><span class="gold-leaf ghost-name">Spr1ngChkn</span>' +
+  '<span class="gold-leaf ghost-ent">Enterprises</span></h1></div><hr class="glass-line ghost-line">' +
+  '<div class="glass-bottom"><p class="gold-leaf glass-below ghost-tag">Game. Tech. Code.</p></div>';
+var MBL_GLASS = '<div class="glass-top"><h1 class="wordmark"><span class="wordmark-line gold-leaf">Matchburn</span>' +
+  '<span class="wordmark-line wordmark-line--lux gold-leaf">LUX</span></h1>' +
+  '<p class="gold-leaf glass-above">Creative Consultant</p></div><hr class="glass-line">' +
+  '<div class="glass-bottom"><p class="gold-leaf glass-below">Technical Services</p></div>';
+
 var Hallway = (function () {
   "use strict";
 
@@ -13,6 +128,9 @@ var Hallway = (function () {
 
   function unlock() {
     if (ctx) {
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
       return true;
     }
     if (!AudioCtx) {
@@ -478,7 +596,7 @@ var Hallway = (function () {
   handle.removeAttribute("aria-hidden");
   handle.setAttribute("role", "button");
   handle.setAttribute("tabindex", "0");
-  handle.setAttribute("aria-label", "Try the handle: by appointment only");
+  handle.setAttribute("aria-label", SE_DOOR ? "Open the door" : "Try the handle: by appointment only");
 
   function anyPanelOpen() {
     return card.classList.contains("is-open") || brochure.classList.contains("is-open");
@@ -541,13 +659,18 @@ var Hallway = (function () {
     void doorSlab.offsetWidth;
     doorSlab.classList.add("is-knocking");
 
-    [45, 342, 639].forEach(function (t) {
+    [45, 342, 639].forEach(function (t, k) {
       var d = pause(t) / 1000;
+      if (SE_DOOR) {
+        Hallway.burst({ duration: 0.04, filterType: "lowpass", freq: 700, gain: 0.22, delay: d, toRoom: 0.1 });
+        Hallway.tone({ freq: [660, 880, 1320][k], type: "square", duration: 0.07, gain: 0.04, delay: d + 0.02 });
+        return;
+      }
       Hallway.burst({ duration: 0.02, filterType: "highpass", freq: 3200, gain: 0.22, delay: d, toRoom: 0.15 });
       Hallway.tone({ freq: 2400, type: "triangle", duration: 0.12, gain: 0.09, delay: d + 0.01 });
     });
 
-    var message = "You...and everyone else, Kid";
+    var message = document.body.getAttribute("data-knock-message") || "you...\nand everyone else, kid";
 
     window.setTimeout(function () { showNotice(message); }, pause(1000));
     window.setTimeout(function () {
@@ -626,6 +749,17 @@ var Hallway = (function () {
     if (busy) {
       return;
     }
+    if (SE_DOOR) {
+      if (anyPanelOpen()) {
+        closeCard();
+        closeBrochure();
+      }
+      Hallway.burst({ duration: 0.03, filterType: "highpass", freq: 3600, gain: 0.12 });
+      Hallway.tone({ freq: 160, type: "sine", duration: 0.25, gain: 0.16, delay: 0.08 });
+      Hallway.sweep({ from: 260, to: 700, duration: 1.2, gain: 0.06, delay: 0.25 });
+      document.dispatchEvent(new CustomEvent("se-door-open"));
+      return;
+    }
     if (anyPanelOpen()) {
       closeCard();
       closeBrochure();
@@ -681,11 +815,36 @@ var Hallway = (function () {
       e.preventDefault();
       var key = window.DOOR_KEY_SHA256;
       var tried = plateInput ? plateInput.value : "";
-      if (!key || !tried || !window.crypto || !crypto.subtle) {
+      if (!tried || !window.crypto || !crypto.subtle) {
         refuse();
         return;
       }
-      sha256Hex(tried).then(function (hex) {
+      var DOWN_THE_HALL = "dcdb6f8f6ee863d915d6f56f0d932b66cc0ae57bc15785f67b39c1a8635a74cf";
+      sha256Hex(tried.trim().toLowerCase()).then(function (hall) {
+        if (hall !== DOWN_THE_HALL) {
+          return false;
+        }
+        plateRefusal.textContent = "Down the hall.";
+        window.setTimeout(function () {
+          closeAppointment();
+          showWalkCue(function () {
+            walkAcross({ dir: "right", lettering: SE_GLASS, dest: "Spr1ngChknEnt/", flag: "mbl-walk" });
+          });
+        }, 900);
+        return true;
+      }).then(function (walked) {
+        if (walked) {
+          return null;
+        }
+        if (!key) {
+          refuse();
+          return null;
+        }
+        return sha256Hex(tried);
+      }).then(function (hex) {
+        if (hex === null || hex === undefined) {
+          return;
+        }
         if (hex !== key) {
           refuse();
           return;
@@ -726,16 +885,17 @@ var Hallway = (function () {
     rfiSend.addEventListener("click", function () {
       var hint = document.querySelector(".rfi-hint");
       var text = rfiNote.value.trim();
+      var d = rfiSend.dataset;
       if (!text) {
-        if (hint) hint.textContent = "Write a line or two first, then leave the note.";
+        if (hint) hint.textContent = d.empty || "Write a line or two first, then leave the note.";
         rfiNote.focus();
         return;
       }
-      var subject = encodeURIComponent("Request for info (matchburnlux.com)");
+      var subject = encodeURIComponent(d.subject || "Request for info (matchburnlux.com)");
       var from = rfiEmail ? rfiEmail.value.trim() : "";
       var body = encodeURIComponent(from ? text + "\n\nReply to: " + from : text);
-      window.location.href = "mailto:ignite@matchburnlux.com?subject=" + subject + "&body=" + body;
-      if (hint) hint.textContent = "Your email app should open with the note ready to send.";
+      window.location.href = "mailto:" + (d.to || "ignite@matchburnlux.com") + "?subject=" + subject + "&body=" + body;
+      if (hint) hint.textContent = d.sent || "Your email app should open with the note ready to send.";
     });
   }
 
@@ -806,6 +966,46 @@ var Hallway = (function () {
   if (!gate) {
     return;
   }
+
+  var walkedIn = false;
+  try {
+    walkedIn = SE_DOOR && sessionStorage.getItem("mbl-walk") === "1";
+    sessionStorage.removeItem("mbl-walk");
+  } catch (err) {  }
+  var walkedBack = false;
+  try {
+    walkedBack = !SE_DOOR && sessionStorage.getItem("se-walk") === "1";
+    sessionStorage.removeItem("se-walk");
+  } catch (err) {  }
+  if (walkedBack) {
+    var wakeBack = function () {
+      Hallway.unlock();
+      if (!Hallway.player.isPlaying()) {
+        Hallway.player.play();
+      }
+      document.removeEventListener("pointerdown", wakeBack, true);
+      document.removeEventListener("keydown", wakeBack, true);
+    };
+    document.addEventListener("pointerdown", wakeBack, true);
+    document.addEventListener("keydown", wakeBack, true);
+    return;
+  }
+  if (walkedIn) {
+    document.addEventListener("DOMContentLoaded", function () {
+      document.dispatchEvent(new CustomEvent("se-enter"));
+    });
+    var wake = function () {
+      Hallway.unlock();
+      if (!document.querySelector(".radio.is-on")) {
+        document.dispatchEvent(new CustomEvent("se-enter"));
+      }
+      document.removeEventListener("pointerdown", wake, true);
+      document.removeEventListener("keydown", wake, true);
+    };
+    document.addEventListener("pointerdown", wake, true);
+    document.addEventListener("keydown", wake, true);
+    return;
+  }
   gate.hidden = false;
 
   var opened = false;
@@ -817,8 +1017,13 @@ var Hallway = (function () {
     }
     opened = true;
     Hallway.unlock();
-    var walkMs = Hallway.footsteps(ARRIVAL_MS) || ARRIVAL_MS;
-    Hallway.phonographArrive(ARRIVAL_MS);
+    if (SE_DOOR) {
+      document.dispatchEvent(new CustomEvent("se-enter"));
+    }
+    var walkMs = SE_DOOR ? ARRIVAL_MS : (Hallway.footsteps(ARRIVAL_MS) || ARRIVAL_MS);
+    if (!SE_DOOR) {
+      Hallway.phonographArrive(ARRIVAL_MS);
+    }
 
     var STEP_MS = 860;
     var hallway = document.querySelector(".hallway");
@@ -849,10 +1054,14 @@ var Hallway = (function () {
 
 (function () {
   "use strict";
-  var zones = [
-    [".knock-zone--high", "img/fist.svg", "touch-fist"],
-    [".knock-zone--low", "img/letter.svg", "touch-letter"],
-    [".handle", "img/key.svg", "touch-key"]
+  var zones = SE_DOOR ? [
+    [".knock-zone--high", DOOR_BASE + "img/se-gamepad.svg", "touch-fist"],
+    [".knock-zone--low", DOOR_BASE + "img/se-chat.svg", "touch-letter"],
+    [".handle", DOOR_BASE + "img/se-power.svg", "touch-key"]
+  ] : [
+    [".knock-zone--high", DOOR_BASE + "img/fist.svg", "touch-fist"],
+    [".knock-zone--low", DOOR_BASE + "img/letter.svg", "touch-letter"],
+    [".handle", DOOR_BASE + "img/key.svg", "touch-key"]
   ];
   zones.forEach(function (z) {
     var el = document.querySelector(z[0]);

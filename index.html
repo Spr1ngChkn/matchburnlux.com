@@ -90,7 +90,7 @@
         </div>
 
         <div class="under-door-floor">
-          <button type="button" class="under-door" aria-label="A brochure slid under the door. Open it." hidden><span>Info</span></button>
+          <button type="button" class="under-door" aria-label="A brochure slid under the door. Open it." hidden><img class="booklet-logo" src="img/match.png" alt="" width="115" height="92"><span>Info</span></button>
         </div>
       </section>
 
@@ -110,6 +110,7 @@
 
     <section id="brochure" class="note-card door-panel" aria-labelledby="brochure-name">
       <button type="button" class="panel-close">Close</button>
+      <img class="info-logo" src="img/match.png" alt="" width="115" height="92">
       <h2 id="brochure-name" class="note-title" tabindex="-1">Matchburn LUX</h2>
       
       <p class="info-line info-lead">A consulting firm.<br>Conceptual &amp; Creative Development.</p>
@@ -118,7 +119,6 @@
       <p class="info-links">
         <a href="fees/">Fees</a> &middot;
         <a href="goods/">The Goods</a> &middot;
-        <a href="#contact">Leave a note</a> &middot;
         <a href="blog/">The Files</a> &middot;
         <a href="privacy/">Privacy</a>
       </p>
@@ -192,13 +192,13 @@
   </main>
 
   <footer class="site-footer">
-    <p class="fine">&copy; 2006 Matchburn LUX &middot; by appointment only</p>
     
     <div class="phonograph-deck">
       <p class="visually-hidden" id="ticker-live" role="status" aria-live="polite"></p>
       <div class="ticker-window" hidden>
         <span class="ticker-text" id="ticker-text" aria-hidden="true"></span>
       </div>
+    <p class="fine">&copy; 2006&ndash;2026 Matchburn LUX &middot; All rights reserved &middot; by appointment only</p>
       <button type="button" class="deck-btn" id="deck-play" aria-label="Play the phonograph" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 2.5 L13 8 L4 13.5 Z"/></svg></button>
       <button type="button" class="deck-btn" id="deck-stop" aria-label="Stop the phonograph" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="9" height="9"/></svg></button>
       <button type="button" class="deck-btn" id="deck-next" aria-label="Next track" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 3 L9 8 L2.5 13 Z"/><rect x="10.5" y="3" width="2.5" height="10"/></svg></button>
