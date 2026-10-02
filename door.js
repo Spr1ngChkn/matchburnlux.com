@@ -832,7 +832,18 @@ var Hallway = (function () {
         return;
       }
       var DOWN_THE_HALL = "dcdb6f8f6ee863d915d6f56f0d932b66cc0ae57bc15785f67b39c1a8635a74cf";
+      var PRIVATE_FILES = {
+        "b7d25aef9e9e30fcbc85bf93a79f00efb839b16615cccdc91bb7063f30ee8b43": "cadeperson/"
+      };
       sha256Hex(tried.trim().toLowerCase()).then(function (hall) {
+        if (PRIVATE_FILES[hall]) {
+          try { sessionStorage.setItem("file-pass", tried.trim().toLowerCase()); } catch (err) {  }
+          Hallway.burst({ duration: 0.03, filterType: "highpass", freq: 3200, gain: 0.14 });
+          Hallway.tone({ freq: 140, type: "sine", duration: 0.35, gain: 0.2, delay: 0.12 });
+          plateRefusal.textContent = "A file for you.";
+          window.setTimeout(function () { window.location.href = PRIVATE_FILES[hall]; }, 1100);
+          return true;
+        }
         if (hall !== DOWN_THE_HALL) {
           return false;
         }
