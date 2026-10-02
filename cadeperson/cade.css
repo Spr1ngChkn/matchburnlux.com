@@ -1,0 +1,10 @@
+
+.cade-form { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; margin: 1rem 0; }
+.cade-form input { padding: 0.45rem; font: inherit; }
+.cade-form button { padding: 0.45rem 0.9rem; font: inherit; cursor: pointer; }
+.cade-msg { text-align: center; min-height: 1.4em; }
+.cade-fees { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1rem; }
+.cade-fees td { padding: 0.35rem 0.4rem; border-bottom: 1px solid rgba(0, 0, 0, 0.18); vertical-align: top; }
+.cade-fees td:last-child { text-align: right; white-space: nowrap; font-weight: bold; }
+.cade-total td { border-top: 2px solid rgba(0, 0, 0, 0.5); font-weight: bold; }
+.cade h2 { font-size: 1.05rem; margin: 1.2rem 0 0.4rem; }
