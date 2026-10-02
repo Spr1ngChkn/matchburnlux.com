@@ -62,3 +62,44 @@
 @media (max-width: 30rem) {
   .loot-grid { grid-template-columns: 1fr; }
 }
+
+.app-sheet { text-align: center; }
+.app-center { margin: 1.2rem 0; }
+.app-go,
+.app-overlay button {
+  font: bold 1rem "Courier New", Courier, monospace;
+  color: #07040d;
+  background: #9dff3c;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.55rem 1.1rem;
+  margin: 0.3rem;
+  cursor: pointer;
+  box-shadow: 0 0 0.8rem rgba(157, 255, 60, 0.5);
+}
+.app-go { font-size: 1.2rem; background: #ffe14a; box-shadow: 0 0 1rem rgba(255, 225, 74, 0.55); }
+.app-origin { font-size: 0.8rem; opacity: 0.75; }
+.app-overlay {
+  position: relative;
+  margin: 1rem auto 0;
+  max-width: 28rem;
+  padding: 1.4rem 1rem 1rem;
+  border: 2px solid #39e6ff;
+  border-radius: 6px;
+  background: rgba(7, 4, 13, 0.85);
+  box-shadow: 0 0 1.2rem rgba(57, 230, 255, 0.35);
+}
+.app-overlay .app-close { position: absolute; top: 0.2rem; right: 0.2rem; background: transparent; color: #39e6ff; box-shadow: none; }
+.app-step label { display: block; margin: 0.6rem 0 0.2rem; color: #9dff3c; }
+.app-step input,
+.app-step textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #b46bff;
+  background: #0b0614;
+  color: #e6e0ff;
+  font: inherit;
+}
+.app-hint { font-size: 0.8rem; opacity: 0.8; }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Spr1ngChkn.app · Spr1ngChkn Enterprises</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32.png">
+  <link rel="stylesheet" href="../../site.css">
+  <link rel="stylesheet" href="../../se.css">
+  <link rel="stylesheet" href="../se-pages.css">
+  <script src="app.js" defer></script>
+</head>
+<body class="page se-page se-sub">
+
+  <header class="page-top">
+    <a href="../">Spr1ngChkn Enterprises</a>
+  </header>
+
+  <main class="sheet app-sheet">
+    <img class="se-sub-logo" src="../../img/se-chick.png" alt="" width="160" height="114">
+    <h1>Spr1ngChkn</h1>
+    <p class="tagline">Games. Tech. Code.</p>
+    <p class="app-center"><button type="button" class="app-go">::beekawwwk::</button></p>
+    <p class="app-origin">The original Spr1ngChkn.tech app, ported down the hall.
+      Source: <a href="https://github.com/Spr1ngChkn/Spr1ngChkn.tech" target="_blank" rel="noopener noreferrer">github.com/Spr1ngChkn/Spr1ngChkn.tech</a></p>
+
+    <section class="app-overlay" hidden aria-live="polite">
+      <button type="button" class="app-close" aria-label="Close">X</button>
+
+      <div class="app-step" data-step="games">
+        <p>Like gaming?</p>
+        <button type="button" data-go="clips">True</button>
+        <button type="button" data-go="tech">False</button>
+      </div>
+
+      <div class="app-step" data-step="clips" hidden>
+        <p>Peep these clips</p>
+        <p><a href="https://www.instagram.com/og_spr1ngchkn/" target="_blank" rel="noopener noreferrer">@og_spr1ngchkn on Instagram</a> &middot;
+          <a href="https://www.twitch.tv/spr1ngchkn" target="_blank" rel="noopener noreferrer">twitch.tv/spr1ngchkn</a></p>
+      </div>
+
+      <div class="app-step" data-step="tech" hidden>
+        <p>Do you need a technician?</p>
+        <button type="button" data-go="form" data-title="How can we help?">True</button>
+        <button type="button" data-go="code">False</button>
+      </div>
+
+      <div class="app-step" data-step="code" hidden>
+        <p>Having problems with your code?</p>
+        <button type="button" data-go="form" data-title="Having problems with your code?">True</button>
+        <button type="button" data-go="more">False</button>
+      </div>
+
+      <div class="app-step" data-step="form" hidden>
+        <h2 class="app-form-title">How can we help?</h2>
+        <label for="app-name">Name</label>
+        <input id="app-name" type="text" maxlength="120" autocomplete="name">
+        <label for="app-goal">Goal</label>
+        <textarea id="app-goal" rows="3" maxlength="2000"></textarea>
+        <button type="button" class="app-send">Transmit</button>
+        <p class="app-hint">Opens your own mail client, routed to the crew.</p>
+      </div>
+
+      <div class="app-step" data-step="more" hidden>
+        <p>No worries. Other channels:</p>
+        <p><a href="../log/">The Log</a> &middot; <a href="https://discord.gg/PkWJ9Hkf4" target="_blank" rel="noopener noreferrer">Discord</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <ul>
+      <li><a href="../">The door</a></li>
+      <li><a href="../log/">The Log</a></li>
+      <li><a href="../goods/">Loot 4 Goblins</a></li>
+      <li><a href="./">Spr1ngChkn.app</a></li>
+    </ul>
+    <p class="fine">&copy; 2017&ndash;2026 Spr1ngChkn Enterprises &middot; All rights reserved</p>
+  </footer>
+
+</body>
+</html>
