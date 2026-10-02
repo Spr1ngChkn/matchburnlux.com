@@ -1,0 +1,9 @@
+
+.cade-hello { font-style: italic; }
+.cade-min { margin: 1rem 0 0.4rem; }
+.cade-fees { width: 100%; border-collapse: collapse; margin: 0 0 1.2rem; font-size: 0.95rem; }
+.cade-fees th { text-align: left; border-bottom: 2px solid currentColor; padding: 0.35rem 0.4rem; }
+.cade-fees td { padding: 0.4rem; border-bottom: 1px solid rgba(0, 0, 0, 0.2); vertical-align: top; }
+.cade-fees th:last-child, .cade-fees td:last-child { text-align: right; white-space: nowrap; font-weight: bold; }
+.cade-fees tfoot td { border-bottom: 0; }
+.cade-total td { border-top: 2px solid currentColor; font-weight: bold; }

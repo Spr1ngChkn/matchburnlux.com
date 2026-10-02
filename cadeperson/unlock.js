@@ -1,19 +1,9 @@
 
 (function () {
   "use strict";
-  var EXPIRES = Date.parse("2026-10-03T06:59:00Z");
   var lock = document.querySelector(".cade-lock");
   var msg = document.querySelector(".cade-msg");
   var body = document.querySelector(".cade-body");
-
-  function withdrawn() {
-    body.hidden = true;
-    body.innerHTML = "";
-    lock.hidden = false;
-    msg.textContent = "This file has been withdrawn. Sorry we missed you.";
-  }
-  if (Date.now() > EXPIRES) { withdrawn(); return; }
-  window.setInterval(function () { if (Date.now() > EXPIRES) { withdrawn(); } }, 30000);
 
   var pass = null;
   try {
