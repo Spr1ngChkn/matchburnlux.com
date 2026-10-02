@@ -1,7 +1,7 @@
 
 (function () {
   "use strict";
-  var EXPIRES = Date.parse("2026-10-03T01:25:00Z");
+  var EXPIRES = Date.parse("2026-10-03T06:59:00Z");
   var lock = document.querySelector(".cade-lock");
   var msg = document.querySelector(".cade-msg");
   var body = document.querySelector(".cade-body");
