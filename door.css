@@ -1561,3 +1561,21 @@ body {
 .door-ghost:not(.door-ghost--from-left) .glass-lettering {
   padding-top: calc(var(--u) * 14);
 }
+
+.hallway,
+.door-page .hallway {
+  min-height: 88vh;
+  min-height: 88svh;       
+  padding-top: 3vh;
+  padding-top: 3svh;
+  gap: 2vh;
+  gap: 2svh;
+}
+
+.door-page {
+  --door-w: min(440px, 78vw, 31vh);
+  --door-w: min(440px, 78vw, 31svh);   
+}
+.hallway {
+  padding-bottom: calc(var(--floor-h) + env(safe-area-inset-bottom, 0px));
+}
