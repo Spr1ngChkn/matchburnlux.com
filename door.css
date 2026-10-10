@@ -1580,15 +1580,6 @@ body {
   padding-bottom: calc(var(--floor-h) + env(safe-area-inset-bottom, 0px));
 }
 
-@supports (width: 1cqw) {
-  .door-page:not(.se-page) .glass {
-    container-type: inline-size;
-  }
-  .door-page:not(.se-page) .glass-lettering {
-    --u: 1.36cqw;          
-  }
-}
-
-.se-page .door:not(.door-ghost) .glass-lettering {
+.glass-lettering {
   --u: calc(var(--door-w) / 100 * 0.82);
 }
