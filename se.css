@@ -316,3 +316,13 @@
 .se-page .door.is-open .door-slab {
   transform-style: preserve-3d;
 }
+
+.se-page .se-services { list-style: none; margin: 0.6rem auto 0.4rem; padding: 0; max-width: 20rem; text-align: left; }
+.se-page .se-services li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.2rem 0; border-bottom: 1px dashed rgba(57, 230, 255, 0.3); }
+.se-page .se-services li span:last-child { color: var(--se-lime); white-space: nowrap; }
+.se-page .se-services-note { font-size: 0.85em; opacity: 0.8; }
+
+@media (max-width: 30rem) {
+  .site-footer .radio { max-width: calc(100vw - 24px); box-sizing: border-box; }
+  .site-footer .radio-volume { display: none; }
+}
