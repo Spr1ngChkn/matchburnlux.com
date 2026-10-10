@@ -1564,18 +1564,27 @@ body {
 
 .hallway,
 .door-page .hallway {
-  min-height: 88vh;
-  min-height: 88svh;       
-  padding-top: 3vh;
-  padding-top: 3svh;
-  gap: 2vh;
-  gap: 2svh;
+  min-height: 95vh;
+  min-height: 95svh;       
+  padding-top: 1vh;
+  padding-top: 1svh;
+  gap: 1vh;
+  gap: 1svh;
 }
 
 .door-page {
-  --door-w: min(440px, 78vw, 31vh);
-  --door-w: min(440px, 78vw, 31svh);   
+  --door-w: min(460px, 84vw, 38vh);
+  --door-w: min(460px, 84vw, 38svh);   
 }
 .hallway {
   padding-bottom: calc(var(--floor-h) + env(safe-area-inset-bottom, 0px));
+}
+
+@supports (width: 1cqw) {
+  .glass {
+    container-type: inline-size;
+  }
+  .glass-lettering {
+    --u: 1.36cqw;          
+  }
 }
