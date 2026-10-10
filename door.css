@@ -1581,10 +1581,14 @@ body {
 }
 
 @supports (width: 1cqw) {
-  .glass {
+  .door-page:not(.se-page) .glass {
     container-type: inline-size;
   }
-  .glass-lettering {
+  .door-page:not(.se-page) .glass-lettering {
     --u: 1.36cqw;          
   }
+}
+
+.se-page .door:not(.door-ghost) .glass-lettering {
+  --u: calc(var(--door-w) / 100 * 0.82);
 }
