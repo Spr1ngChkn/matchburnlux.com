@@ -114,7 +114,7 @@ function litPage(match) {
       <p class="signoff"><a href="../">Back to the door</a></p>
     </div>
     <div class="match-body" hidden></div>
-    <p class="match-fuse">This transmission will self-eliminate at ${esc(spoken(match.burn))}.</p>
+    <p class="match-deadline">This transmission will self-eliminate at ${esc(spoken(match.burn))}.</p>
   </main>
 ` + FOOT;
 }

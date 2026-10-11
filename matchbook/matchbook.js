@@ -38,7 +38,7 @@
   if (!lock) { return; }
   var msg = lock.querySelector(".match-msg");
   var body = document.querySelector(".match-body");
-  var fuse = document.querySelector(".match-fuse");
+  var deadline = document.querySelector(".match-deadline");
   var meta = document.querySelector('meta[name="matchbook-burn"]');
   var burnAt = meta ? Date.parse(meta.content) : NaN;
 
@@ -48,7 +48,7 @@
     lock.hidden = false;
     lock.querySelector("h1").textContent = "Transmission ended";
     msg.textContent = "This transmission self-eliminated. The offer and its terms went with it. To revisit it, ask for a new file.";
-    if (fuse) { fuse.hidden = true; }
+    if (deadline) { deadline.hidden = true; }
   }
 
   if (isNaN(burnAt) || Date.now() >= burnAt) { toAsh(); return; }

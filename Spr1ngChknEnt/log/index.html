@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../../site.css">
   <link rel="stylesheet" href="../../se.css">
   <link rel="stylesheet" href="../se-pages.css">
-  <script src="log.js" defer></script>
+  <script src="log.js?v=20261011a" defer></script>
 </head>
 <body class="page se-page se-sub">
 
@@ -24,12 +24,21 @@
 
   <main class="terminal" aria-labelledby="log-title">
     <h1 id="log-title">spr1ngchkn@enterprises:~/the-log</h1>
-    <p class="term-prompt">$ tail -n 30 dev.log | sort -r</p>
+    <p class="term-prompt">$ cat dev.log | sort -r</p>
 
     <div class="log-list">
 
+      <article class="log-entry" data-date="2026-10-11">
+        <p class="log-head">[2026-10-11] <span class="ok">200 OK</span> dev.log: recovered history</p>
+        <p>The first dev blog is gone: six entries, hand-coded on a CSS grid, the last one with a working hours &times; lessons calculator built into the page. This log picks up its thread. The entries before October 2026 are rebuilt from the study notes and daily logs of the full-stack run.</p>
+        <ul class="log-stats">
+          <li>sources: the full-stack study notes (HTML, CSS, JavaScript, TypeScript, React, Node/Express, SQL) and the daily notes</li>
+          <li>also today: private files that end themselves on time. The page locks at the deadline, and a scheduled job deletes the file.</li>
+        </ul>
+      </article>
+
       <article class="log-entry" data-date="2026-10-10">
-        <p class="log-head">[2026-10-10] <span class="ok">200 OK</span> dev.log #006: join the crew</p>
+        <p class="log-head">[2026-10-10] <span class="ok">200 OK</span> dev.log: join the crew</p>
         <p>Membership goes first. Spr1ngChkn Enterprises is a members' crew now: content and exclusive offers up front, an operator on call when the tech fights back.</p>
         <ul class="log-stats">
           <li>new page: Membership &amp; services (Recon Pass, Operator, Squad Lead), with every service as an Unlockable</li>
@@ -41,7 +50,7 @@
       </article>
 
       <article class="log-entry" data-date="2026-10-09">
-        <p class="log-head">[2026-10-09] <span class="ok">200 OK</span> dev.log #005: HUD-safe</p>
+        <p class="log-head">[2026-10-09] <span class="ok">200 OK</span> dev.log: HUD-safe</p>
         <p>Field report: on phones, the note under the door was hiding behind the browser bars. Cause: <code>vh</code> measures the screen as if the bars were gone.</p>
         <ul class="log-stats">
           <li>switched to the small viewport (<code>svh</code>), resized the door, and kept a safe band at the bottom</li>
@@ -52,7 +61,7 @@
       </article>
 
       <article class="log-entry" data-date="2026-10-04">
-        <p class="log-head">[2026-10-04] <span class="ok">200 OK</span> dev.log #004: the Linux question</p>
+        <p class="log-head">[2026-10-04] <span class="ok">200 OK</span> dev.log: the Linux question</p>
         <p>Research day. A spare SATA drive becomes a Linux boot drive for VMs and local LLMs. Weighed Omarchy (Arch + Hyprland) against Ubuntu and Pop!_OS.</p>
         <ul class="log-stats">
           <li>plan: Omarchy in a VM as the learning lab; a stable distro on the drive as the AI host</li>
@@ -62,7 +71,7 @@
       </article>
 
       <article class="log-entry" data-date="2026-10-03">
-        <p class="log-head">[2026-10-03] <span class="ok">200 OK</span> dev.log #003: self-eliminated</p>
+        <p class="log-head">[2026-10-03] <span class="ok">200 OK</span> dev.log: self-eliminated</p>
         <p>The private file self-eliminated. Lesson kept: a timed promise enforces itself in code, never on someone's memory. Every timer on this site now runs itself.</p>
         <ul class="log-stats">
           <li>the encrypted file was pulled from the site; a "transmission ended" notice took its place</li>
@@ -70,7 +79,7 @@
       </article>
 
       <article class="log-entry" data-date="2026-10-02">
-        <p class="log-head">[2026-10-02] <span class="ok">200 OK</span> dev.log #002: a door that keeps a secret</p>
+        <p class="log-head">[2026-10-02] <span class="ok">200 OK</span> dev.log: a door that keeps a secret</p>
         <p>Built a private file that opens only from the door handle with the right passcode. The browser derives the key and decrypts the file locally: nothing is stored, and without the passcode the page shows nothing.</p>
         <ul class="log-stats">
           <li>AES-GCM, key from PBKDF2, all in the browser on a static site</li>
@@ -80,7 +89,7 @@
       </article>
 
       <article class="log-entry" data-date="2026-10-01">
-        <p class="log-head">[2026-10-01] <span class="ok">200 OK</span> dev.log #001: a second door down the hall</p>
+        <p class="log-head">[2026-10-01] <span class="ok">200 OK</span> dev.log: a second door down the hall</p>
         <blockquote>Working with Claude has truly helped me get my ideas out of my head and onto the screen
           much faster than it would have in the past. Super thankful.</blockquote>
         <p>The numbers behind that feeling:</p>
@@ -92,7 +101,74 @@
           <li>shipped live on matchburnlux.com: The Cutting Room (clips)</li>
         </ul>
         <p>Shout-out to <a href="https://www.anthropic.com/" target="_blank" rel="noopener noreferrer">Anthropic</a>,
-          the team behind Claude. Daily code notes start here.</p>
+          the team behind Claude. Daily code notes pick up here.</p>
+      </article>
+
+      <article class="log-entry" data-date="2026-08-12">
+        <p class="log-head">[2026-08-12] <span class="ok">200 OK</span> dev.log: one year</p>
+        <p>A year since the first lesson on the full-stack track. Months since the last one. The lessons are done; the next step is shipping real things.</p>
+      </article>
+
+      <article class="log-entry" data-date="2026-02-04">
+        <p class="log-head">[2026-02-04] <span class="ok">200 OK</span> dev.log: coursework complete</p>
+        <p>Full-stack coursework on Mimo: done. Front end to back end, start to finish.</p>
+        <ul class="log-stats">
+          <li>HTML &rarr; CSS &rarr; JavaScript &rarr; TypeScript &rarr; React &rarr; Node &amp; Express &rarr; SQL</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2025-11-13">
+        <p class="log-head">[2025-11-13] <span class="ok">200 OK</span> dev.log: react deep dive</p>
+        <p>In the React Deep Dive chapter. Watched the React documentary for the bigger picture of how it changed interactive UI. The front-end path is nearly done; Express and Git are next.</p>
+        <ul class="log-stats">
+          <li>practice lives in GitHub and Working Copy now</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2025-10-26">
+        <p class="log-head">[2025-10-26] <span class="ok">200 OK</span> dev.log: classes</p>
+        <p>An 18-day streak, broken by a paint job. JavaScript classes are making functions click: <code>extends</code>, superclass &rarr; subclass, with properties and methods flowing one way.</p>
+        <ul class="log-stats">
+          <li>next: React, then the front-end certificate</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2025-10-03">
+        <p class="log-head">[2025-10-03] <span class="ok">200 OK</span> dev.log: the light bulb</p>
+        <p>Mid-lesson on the <code>return</code> statement, it all came together. Often I have no clue what's happening until suddenly I do.</p>
+        <ul class="log-stats">
+          <li>unlocked: a CSS certificate to match the HTML one</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2025-09-19">
+        <p class="log-head">[2025-09-19] <span class="ok">200 OK</span> dev.log: grid on hold</p>
+        <p>Paused the CSS Grid lessons to work something out for matchburnlux.com. The real site starts pulling.</p>
+      </article>
+
+      <article class="log-entry" data-date="2025-09-04">
+        <p class="log-head">[2025-09-04] <span class="ok">200 OK</span> dev.log: forms</p>
+        <p>An hour and a half of HTML: <code>&lt;form&gt;</code> and <code>&lt;fieldset&gt;</code>. The plan: build these into the first Matchburn LUX page.</p>
+      </article>
+
+      <article class="log-entry" data-date="2025-08-30">
+        <p class="log-head">[2025-08-30] <span class="ok">200 OK</span> dev.log: streak lost at 16</p>
+        <p>Sixteen days, gone. Turns out a practice round doesn't count as a lesson. Lesson learned, anyway.</p>
+      </article>
+
+      <article class="log-entry" data-date="2025-08-27">
+        <p class="log-head">[2025-08-27] <span class="ok">200 OK</span> dev.log: notes take shape</p>
+        <p>Reorganized the study notes by toolset: HTML, CSS, JavaScript, SQL. The HTML has really taken over.</p>
+      </article>
+
+      <article class="log-entry" data-date="2025-08-24">
+        <p class="log-head">[2025-08-24] <span class="ok">200 OK</span> dev.log: superscript</p>
+        <p>A day of JavaScript practice. Found that <code>&lt;sup&gt;</code> renders inside the notes app too; it took a stray space to keep the tag on screen.</p>
+      </article>
+
+      <article class="log-entry" data-date="2025-08-16">
+        <p class="log-head">[2025-08-16] <span class="ok">200 OK</span> dev.log: first styles</p>
+        <p>On the Mimo full-stack track: through the HTML basics and into CSS, styling elements by hand.</p>
       </article>
 
     </div>
