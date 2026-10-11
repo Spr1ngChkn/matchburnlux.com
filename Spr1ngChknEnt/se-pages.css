@@ -103,3 +103,17 @@
   font: inherit;
 }
 .app-hint { font-size: 0.8rem; opacity: 0.8; }
+
+.log-milestone {
+  padding: 1rem 1.1rem 1.1rem;
+  border: 3px double #ffd23c;
+  border-radius: 4px;
+  background: rgba(255, 210, 60, 0.06);
+  box-shadow: 0 0 1.4rem rgba(255, 210, 60, 0.22);
+  animation: log-glow 3.2s ease-in-out infinite;
+}
+.log-banner { margin: 0 0 0.5rem; color: #ffd23c; font-weight: bold; letter-spacing: 0.2em; text-shadow: 0 0 8px rgba(255, 210, 60, 0.6); }
+.log-milestone .log-head .ok { color: #ffd23c; }
+.log-milestone .log-stats { color: #ffe9a3; }
+@keyframes log-glow { 50% { box-shadow: 0 0 2.2rem rgba(255, 210, 60, 0.38); } }
+@media (prefers-reduced-motion: reduce) { .log-milestone { animation: none; } }
