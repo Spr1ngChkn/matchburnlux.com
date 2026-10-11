@@ -1,0 +1,40 @@
+# Matchbook: burns due private files on matchburnlux.com.
+# Lives in the public repo as .github/workflows/matchbook.yml (copied there by
+# tools/publish-site.py; edit this copy in the vault, never the public one).
+# Every 10 minutes it runs the burner; if a match's time has passed, the
+# encrypted file is deleted, the ash notice replaces it, and the change is
+# committed. GitHub can start scheduled runs late under load; the page's own
+# lock (site/matchbook/matchbook.js) holds the exact deadline meanwhile.
+# Run it by hand: GitHub > Actions > Matchbook > Run workflow.
+name: Matchbook
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: matchbook
+  cancel-in-progress: false
+jobs:
+  burn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Burn what is due
+        run: node .github/matchbook/matchbook.js burn --site .
+      - name: Commit the ash
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "Matchbook"
+            git config user.email "matchbook@users.noreply.github.com"
+            git add -A
+            git commit -m "Matchbook: burned on schedule"
+            git push
+          else
+            echo "Nothing due."
+          fi
