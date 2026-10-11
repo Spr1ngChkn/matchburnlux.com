@@ -28,6 +28,57 @@
 
     <div class="log-list">
 
+      <article class="log-entry" data-date="2026-10-10">
+        <p class="log-head">[2026-10-10] <span class="ok">200 OK</span> dev.log #006: join the crew</p>
+        <p>Membership goes first. Spr1ngChkn Enterprises is a members' crew now: content and exclusive offers up front, an operator on call when the tech fights back.</p>
+        <ul class="log-stats">
+          <li>new page: Membership &amp; services (Recon Pass, Operator, Squad Lead), with every service as an Unlockable</li>
+          <li>The Cutting Room (clips) moved down the hall to this door</li>
+          <li>fixed: iPhone Safari dropped the frosted glass inside the door's 3D layer, so the door now stays flat until it swings</li>
+          <li>added a Safari-engine test browser so iPhone bugs get caught here first</li>
+          <li>23 commits; site +377 / &minus;177 lines</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-09">
+        <p class="log-head">[2026-10-09] <span class="ok">200 OK</span> dev.log #005: HUD-safe</p>
+        <p>Field report: on phones, the note under the door was hiding behind the browser bars. Cause: <code>vh</code> measures the screen as if the bars were gone.</p>
+        <ul class="log-stats">
+          <li>switched to the small viewport (<code>svh</code>), resized the door, and kept a safe band at the bottom</li>
+          <li>measured on 7 screen sizes, both doors: the booklet now sits inside the visible screen on all of them</li>
+          <li>the glass lettering resized to always fit its pane</li>
+          <li>3 publishes; site +62 / &minus;17 lines</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-04">
+        <p class="log-head">[2026-10-04] <span class="ok">200 OK</span> dev.log #004: the Linux question</p>
+        <p>Research day. A spare SATA drive becomes a Linux boot drive for VMs and local LLMs. Weighed Omarchy (Arch + Hyprland) against Ubuntu and Pop!_OS.</p>
+        <ul class="log-stats">
+          <li>plan: Omarchy in a VM as the learning lab; a stable distro on the drive as the AI host</li>
+          <li>a 6 GB graphics card runs 7&ndash;8B models fully on the GPU; bigger ones spill to RAM</li>
+          <li>security vetting first: no curl-pipe-shell installs on the host without reading the script</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-03">
+        <p class="log-head">[2026-10-03] <span class="ok">200 OK</span> dev.log #003: self-eliminated</p>
+        <p>The private file self-eliminated. Lesson kept: a timed promise enforces itself in code, never on someone's memory. Every timer on this site now runs itself.</p>
+        <ul class="log-stats">
+          <li>the encrypted file was pulled from the site; a "transmission ended" notice took its place</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-02">
+        <p class="log-head">[2026-10-02] <span class="ok">200 OK</span> dev.log #002: a door that keeps a secret</p>
+        <p>Built a private file that opens only from the door handle with the right passcode. The browser derives the key and decrypts the file locally: nothing is stored, and without the passcode the page shows nothing.</p>
+        <ul class="log-stats">
+          <li>AES-GCM, key from PBKDF2, all in the browser on a static site</li>
+          <li>7 publishes in one evening; site +201 / &minus;93 lines</li>
+          <li>a sticky <kbd>d</kbd> key cost us twenty minutes of debugging</li>
+        </ul>
+      </article>
+
       <article class="log-entry" data-date="2026-10-01">
         <p class="log-head">[2026-10-01] <span class="ok">200 OK</span> dev.log #001: a second door down the hall</p>
         <blockquote>Working with Claude has truly helped me get my ideas out of my head and onto the screen
