@@ -16,13 +16,19 @@
        expired match can never be published again.
 
   Commands (no dependencies; Node 18+):
-    node matchbook.js strike <slug> --burn <time> --from <draft.html> [--title <t>]
-        Light a new match. <time> is ISO with an offset, e.g. 2026-10-02T19:45:00-07:00.
+    node matchbook.js strike <slug> (--burn <time> | --for <length>) --from <draft.html> [--title <t>]
+        Light a new match. Its window is set one of two ways:
+          --burn <time>    an exact moment, ISO with an offset: 2026-10-02T19:45:00-07:00
+          --for <length>   from now: 90m, 24h, 3d, or combined like 1d12h
+        (Las Vegas is -07:00 in summer time, -08:00 from November to March.)
         The passcode is asked for twice, hidden (or read from MATCHBOOK_PASS).
         Writes site/<slug>/index.html + payload.json and adds the match to the book.
     node matchbook.js burn [--now <time>]       Burn every lit match whose time has passed.
     node matchbook.js snuff <slug>              Burn one match now, whatever its time.
-    node matchbook.js list                      Show the book.
+    node matchbook.js extend <slug> (--burn <time> | --for <length>)
+                                                Move a lit match's burn time (sooner or later);
+                                                rewrites its page and the book together.
+    node matchbook.js list                      Show the book, with the time left on each lit match.
     Any command takes --site <dir> (default: ../../site from this file).
 
   The book: site/matchbook/book.json, public. It holds slugs, burn times and
@@ -70,6 +76,42 @@ function spoken(iso) {
   const time = d.toLocaleTimeString("en-US", { timeZone: ZONE, hour: "numeric", minute: "2-digit" });
   const day = d.toLocaleDateString("en-US", { timeZone: ZONE, weekday: "long", month: "long", day: "numeric", year: "numeric" });
   return time + ", " + day;
+}
+
+// The burn time from --burn (exact) or --for (a length from now), as ISO with
+// the Las Vegas offset, so the book reads in local time.
+function vegasIso(d) {
+  const parts = {};
+  for (const x of new Intl.DateTimeFormat("en-US", { timeZone: ZONE, hourCycle: "h23", year: "numeric",
+    month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }).formatToParts(d)) parts[x.type] = x.value;
+  const local = Date.UTC(+parts.year, +parts.month - 1, +parts.day, +parts.hour, +parts.minute, +parts.second);
+  const off = Math.round((local - Math.floor(d.getTime() / 1000) * 1000) / 60000);   // minutes, e.g. -420
+  const pad = (n) => String(Math.abs(n)).padStart(2, "0");
+  return parts.year + "-" + parts.month + "-" + parts.day + "T" + parts.hour + ":" + parts.minute + ":" + parts.second +
+    (off < 0 ? "-" : "+") + pad(Math.trunc(off / 60)) + ":" + pad(off % 60);
+}
+function burnTime() {
+  const exact = opt("burn");
+  const length = opt("for");
+  if (exact && length) throw new Error("Use --burn or --for, not both.");
+  if (length) {
+    const m = /^(?:(\d+)d)?(?:(\d+)h)?(?:(\d+)m)?$/.exec(length);
+    if (!m || !(m[1] || m[2] || m[3])) throw new Error("--for takes a length like 90m, 24h, 3d or 1d12h.");
+    const ms = (((+m[1] || 0) * 24 + (+m[2] || 0)) * 60 + (+m[3] || 0)) * 60000;
+    return vegasIso(new Date(Date.now() + ms));
+  }
+  if (!exact || isNaN(new Date(exact)) || !/[+-]\d\d:\d\d$|Z$/.test(exact)) {
+    throw new Error("Give --for <length> (24h) or --burn <time> with an offset (2026-10-02T19:45:00-07:00).");
+  }
+  if (new Date(exact) <= new Date()) throw new Error("That burn time has already passed.");
+  return exact;
+}
+function timeLeft(iso) {
+  let min = Math.round((new Date(iso) - Date.now()) / 60000);
+  if (min <= 0) return "due now";
+  const d = Math.floor(min / 1440), h = Math.floor((min % 1440) / 60);
+  min %= 60;
+  return (d ? d + "d " : "") + (d || h ? h + "h " : "") + min + "m left";
 }
 
 // ---- the pages --------------------------------------------------------------
@@ -190,14 +232,10 @@ function askHidden(question) {
 }
 
 async function strike(slug) {
-  const burn = opt("burn");
+  const burn = burnTime();
   const from = opt("from");
   const title = opt("title", "A file for you");
   if (!slug || !/^[a-z0-9-]+$/.test(slug)) throw new Error("slug: lowercase letters, digits and dashes only.");
-  if (!burn || isNaN(new Date(burn)) || !/[+-]\d\d:\d\d$|Z$/.test(burn)) {
-    throw new Error("--burn needs an ISO time with an offset, e.g. 2026-10-02T19:45:00-07:00");
-  }
-  if (new Date(burn) <= new Date()) throw new Error("That burn time has already passed.");
   if (!from || !fs.existsSync(from)) throw new Error("--from must point to the draft HTML fragment.");
   const book = readBook();
   if (book.matches.some((m) => m.slug === slug)) throw new Error("A match named " + slug + " is already in the book.");
@@ -242,10 +280,21 @@ async function strike(slug) {
       burnOne(m);
       writeBook(book);
       console.log("Snuffed " + m.slug + ".");
+    } else if (cmd === "extend") {
+      const book = readBook();
+      const m = book.matches.find((x) => x.slug === argv[1]);
+      if (!m) throw new Error("No match named " + argv[1]);
+      if (m.status !== "lit") throw new Error(m.slug + " is already ash; strike a new match instead.");
+      m.burn = burnTime();
+      fs.writeFileSync(path.join(SITE, m.slug, "index.html"), litPage(m));
+      writeBook(book);
+      console.log(m.slug + " now burns at " + spoken(m.burn) + " (" + timeLeft(m.burn) + "). Publish to make it live.");
     } else if (cmd === "list") {
-      for (const m of readBook().matches) console.log(m.status.padEnd(4), m.slug.padEnd(24), spoken(m.burn));
+      for (const m of readBook().matches) {
+        console.log(m.status.padEnd(4), m.slug.padEnd(24), spoken(m.burn).padEnd(40), m.status === "lit" ? timeLeft(m.burn) : "");
+      }
     } else {
-      console.log("Usage: matchbook.js strike|burn|snuff|list  (see the notes at the top of this file)");
+      console.log("Usage: matchbook.js strike|extend|burn|snuff|list  (see the notes at the top of this file)");
       process.exitCode = 2;
     }
   } catch (e) {
