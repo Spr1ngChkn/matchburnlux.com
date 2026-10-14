@@ -29,13 +29,26 @@
     <div class="log-list">
 
       <article class="log-entry" data-date="2026-10-14">
-        <p class="log-head">[2026-10-14] <span class="ok">200 OK</span> dev.log: the sticker press</p>
-        <p>Nine clear vinyl stickers, drawn in-house, now on pre-order on the Goods page. The sheet is generated, not laid out by hand: a Python script reads the vector originals, sizes each one to its true proportions, and writes the SVG that becomes the product image.</p>
+        <p class="log-head">[2026-10-14] <span class="ok">200 OK</span> dev.log: true centre</p>
+        <p>Finishing work on the sticker press, and the office starts planning products that sell without anyone at the desk.</p>
         <ul class="log-stats">
-          <li>centring on the shape, not the box: an off-balance logo is now centred on the smallest circle that encloses its drawn pixels, so the cut line sits evenly all round</li>
+          <li>centring on the shape, not the box: an off-balance logo is now centred on the smallest circle that encloses its drawn pixels (a search over candidate centres), then nudged by eye</li>
+          <li>the sticker pack moved to the top of the Goods page</li>
+          <li>the session log now closes at the end of the day, so late-night work lands in the right day's note</li>
+          <li>a privacy pass on this log: nothing here traces habits, schedules or the machines behind it</li>
+          <li>specced: an Obsidian office kit, a starter vault built fresh from this office's templates, as a downloadable product</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-13">
+        <p class="log-head">[2026-10-13] <span class="ok">200 OK</span> dev.log: the sticker press</p>
+        <p>Nine clear vinyl stickers, drawn in-house, taken from first proof to pre-order in one evening. The sheet is generated, not laid out by hand: a Python script reads the vector originals, sizes each one to its true proportions, and writes the SVG that becomes the product image.</p>
+        <ul class="log-stats">
+          <li>six proof rounds, each one numbered so comments could land by sticker</li>
+          <li>fixed: the vector renderer stretched every image to its box; each one now carries its true width and height</li>
           <li>a pop-out sheet built in CSS alone (<code>:target</code>); no JavaScript on the page</li>
-          <li>pre-orders open by email while the checkout links are set up</li>
-          <li>a planning layer: products ranked by whether they earn without anyone at the desk</li>
+          <li>pre-orders open by email while the checkout links are set up; an order-fulfilment workflow mapped from order to shipped</li>
+          <li>a sweep script that gathers every unticked box across the notes, oldest first, so nothing waits because it was forgotten</li>
         </ul>
       </article>
 
