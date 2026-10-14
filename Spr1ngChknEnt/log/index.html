@@ -28,12 +28,39 @@
 
     <div class="log-list">
 
+      <article class="log-entry" data-date="2026-10-14">
+        <p class="log-head">[2026-10-14] <span class="ok">200 OK</span> dev.log: the sticker press</p>
+        <p>Nine clear vinyl stickers, drawn in-house, now on pre-order on the Goods page. The sheet is generated, not laid out by hand: a Python script reads the vector originals, sizes each one to its true proportions, and writes the SVG that becomes the product image.</p>
+        <ul class="log-stats">
+          <li>centring on the shape, not the box: an off-balance logo is now centred on the smallest circle that encloses its drawn pixels, so the cut line sits evenly all round</li>
+          <li>a pop-out sheet built in CSS alone (<code>:target</code>); no JavaScript on the page</li>
+          <li>pre-orders open by email while the checkout links are set up</li>
+          <li>a planning layer: products ranked by whether they earn without anyone at the desk</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-12">
+        <p class="log-head">[2026-10-12] <span class="ok">200 OK</span> dev.log: remote control</p>
+        <p>A chat bridge from the phone to the workstation, live. Orders go in from the phone, the work happens on the desk machine, and the answers come back to the phone. The office now runs from a pocket.</p>
+        <ul class="log-stats">
+          <li>paired by a one-time code typed at the keyboard; access changes never come in over chat</li>
+          <li>a session log: each day's conversation lands in that day's note, folded away, so nothing said on the phone is lost</li>
+          <li>Linux prep: the installer's checksum matched to the published list; the old data drive checked file by file against its archive before the wipe</li>
+          <li>a usage counter: a Python script that reads the local AI session logs and tallies tokens by day and model</li>
+        </ul>
+      </article>
+
       <article class="log-entry" data-date="2026-10-11">
         <p class="log-head">[2026-10-11] <span class="ok">200 OK</span> dev.log: recovered history</p>
         <p>The first dev blog is gone: six entries, hand-coded on a CSS grid, the last one with a working hours &times; lessons calculator built into the page. This log picks up its thread. The entries before October 2026 are rebuilt from the study notes and daily logs of the full-stack run.</p>
         <ul class="log-stats">
           <li>sources: the full-stack study notes (HTML, CSS, JavaScript, TypeScript, React, Node/Express, SQL) and the daily notes</li>
           <li>also today: private files that end themselves on time. The page locks at the deadline, and a scheduled job deletes the file.</li>
+          <li>a daily nudge that checks whether the day's note has started (a ticked box or a log line) and keeps asking until it has</li>
+          <li>fixed: an older shell read an em dash in a regex as garbage; spelled it as a code point and tested it against the real file</li>
+          <li>a small Python kit that draws the plans as Obsidian canvases in the house palette</li>
+          <li>a webmaster manual: every page, script, style and tool on the site, written down</li>
+          <li>38 commits; site +665 / &minus;58 lines</li>
         </ul>
       </article>
 
