@@ -1116,3 +1116,5 @@ html::after {
 .popout-body { width: min(56rem, 100%); margin: 0 auto; text-align: center; }
 .popout-body img { width: 100%; height: auto; display: block; margin: 0.75rem 0 1rem; border: 1px solid var(--sheet-edge); box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.8); }
 .popout-close { position: fixed; top: 0.6rem; right: 1rem; font-size: 2.4rem; line-height: 1; color: var(--orange-pale); text-decoration: none; }
+.preorder-tag { margin: 0.75rem 0 -0.4rem; color: var(--gold); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.preorder-button { display: inline-block; text-align: center; text-decoration: none; }
