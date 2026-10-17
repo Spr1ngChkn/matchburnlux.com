@@ -28,6 +28,19 @@
 
     <div class="log-list">
 
+      <article class="log-entry" data-date="2026-10-16">
+        <p class="log-head">[2026-10-16] <span class="ok">200 OK</span> dev.log: root access</p>
+        <p>The workstation moved house. The daily driver is now Linux (Ubuntu LTS) on its own encrypted drive, with the old OS kept on the boot menu for games and creative work. The first day was spent at the shell: <code>sudo</code>, <code>apt</code>, process tables, and getting the office's AI assistant to live on the new machine.</p>
+        <ul class="log-stats">
+          <li>the office vault cloned from its git remote: one source of truth, pulled at the start of a session and pushed at the end</li>
+          <li>the phone-to-desk chat bridge rebuilt on Linux and locked to an allowlist: known senders only, no open pairing requests</li>
+          <li>the assistant now runs inside <code>tmux</code>, a terminal multiplexer, so closing the window no longer ends the session; attach, detach, carry on</li>
+          <li>found three stale sessions holding the same bot and splitting the messages between them; traced with <code>ps</code>, cleared with <code>kill</code>, one live session left</li>
+          <li>round trip verified: a photo sent from the phone, read on the desk, answered back</li>
+          <li>an operating card: a one-page runbook for starting, attaching and checking the assistant</li>
+        </ul>
+      </article>
+
       <article class="log-entry" data-date="2026-10-14">
         <p class="log-head">[2026-10-14] <span class="ok">200 OK</span> dev.log: true centre</p>
         <p>Finishing work on the sticker press, and the office starts planning products that sell without anyone at the desk.</p>
