@@ -149,7 +149,7 @@ var MBL_GLASS = '<div class="glass-top"><h1 class="wordmark"><span class="wordma
   '<span class="wordmark-line wordmark-line--lux gold-leaf">LUX</span></h1>' +
   '<p class="gold-leaf glass-above">Creative Consultant</p></div><hr class="glass-line">' +
   '<div class="glass-bottom"><p class="gold-leaf glass-below">Technical Services</p></div>';
-var SM_GLASS = '<div class="glass-top"><img class="sm-glass-logo" src="' + DOOR_BASE + 'img/sm-medallion-silver.png" alt=""></div>';
+var SM_GLASS = '<div class="glass-top"><img class="sm-glass-logo" src="' + DOOR_BASE + 'img/sm-seal-silver.png" alt=""></div>';
 
 var Hallway = (function () {
   "use strict";
