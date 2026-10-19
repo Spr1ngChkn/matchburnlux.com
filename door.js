@@ -11,8 +11,13 @@ var SM_DOOR = document.body && document.body.getAttribute("data-door") === "sm";
 var SIDE_DOOR = SE_DOOR || SM_DOOR;
 var DOOR_BASE = (document.currentScript && document.currentScript.src.replace(/door\.js(\?.*)?$/, "")) || "";
 
-function showWalkCue(onWalk, side, label) {
+var walkCues = [];
+
+function showWalkCue(onWalk, side, label, again) {
   var left = side === "left";
+  if (!again) {
+    walkCues.push([onWalk, side, label]);
+  }
   var hallway = document.querySelector(".hallway");
   if (!hallway || hallway.querySelector(left ? ".walk-cue--left" : ".walk-cue:not(.walk-cue--left)")) {
     return;
@@ -63,6 +68,21 @@ function showWalkCue(onWalk, side, label) {
   }
 }
 
+// Back/forward can restore a page from the browser's cache mid-walk, ghost
+// door and all. Put the hallway back the way it was and re-hang the cues.
+window.addEventListener("pageshow", function (e) {
+  if (!e.persisted) {
+    return;
+  }
+  var hallway = document.querySelector(".hallway");
+  if (!hallway) {
+    return;
+  }
+  hallway.classList.remove("is-leaving", "is-walking-back");
+  hallway.querySelectorAll(".door-ghost, .bamboo-ghost, .walk-cue").forEach(function (el) { el.remove(); });
+  walkCues.forEach(function (c) { showWalkCue(c[0], c[1], c[2], true); });
+});
+
 function walkAcross(o) {
   var walk = Hallway.footsteps(5200) || 5200;
   Hallway.player.stop();
@@ -106,6 +126,13 @@ function walkAcross(o) {
       ghost.style.top = realDoor.offsetTop + "px";
       ghost.style.width = realDoor.offsetWidth + "px";
       hallway.appendChild(ghost);
+      if (o.bamboo) {
+        var bamboo = document.createElement("div");
+        bamboo.className = "sm-bamboo bamboo-ghost";
+        bamboo.setAttribute("aria-hidden", "true");
+        bamboo.innerHTML = "<span></span><span></span><span></span><i></i>";
+        hallway.appendChild(bamboo);
+      }
     }
     hallway.classList.add(o.dir === "left" ? "is-walking-back" : "is-leaving");
   }
@@ -1246,6 +1273,49 @@ var Hallway = (function () {
     return;
   }
   showWalkCue(function () {
-    walkAcross({ dir: "left", lettering: SM_GLASS, dest: DOOR_BASE + "SilverMonkey/", flag: "mbl-walk-left" });
+    walkAcross({ dir: "left", lettering: SM_GLASS, bamboo: true, dest: DOOR_BASE + "SilverMonkey/", flag: "mbl-walk-left" });
   }, "left", "Walk up the hall to Silver Monkey");
+})();
+
+// Close the door again on the side doors (owner, 2026-10-18).
+(function () {
+  "use strict";
+  if (!SIDE_DOOR) {
+    return;
+  }
+  var hallway = document.querySelector(".hallway");
+  var door = document.querySelector(".door:not(.door-ghost)");
+  if (!hallway || !door) {
+    return;
+  }
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "door-close";
+  btn.textContent = "Close the door";
+  btn.hidden = true;
+  hallway.appendChild(btn);
+
+  document.addEventListener(SM_DOOR ? "sm-door-open" : "se-door-open", function () {
+    window.setTimeout(function () {
+      if (door.classList.contains("is-open")) {
+        btn.hidden = false;
+      }
+    }, 1200);
+  });
+
+  function closeDoor() {
+    if (!door.classList.contains("is-open")) {
+      return;
+    }
+    door.classList.remove("is-open");
+    btn.hidden = true;
+    Hallway.burst({ duration: 0.04, filterType: "lowpass", freq: 260, gain: 0.16, delay: 1.2 });
+    document.dispatchEvent(new CustomEvent("door-close"));
+  }
+  btn.addEventListener("click", closeDoor);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !document.querySelector(".door-panel.is-open, .appointment-plate:not([hidden])")) {
+      closeDoor();
+    }
+  });
 })();

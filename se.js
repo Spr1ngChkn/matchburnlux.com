@@ -100,6 +100,13 @@
   }
 
   document.addEventListener("se-door-open", openDoor);
+  document.addEventListener("door-close", function () {
+    window.setTimeout(function () {
+      if (!door.classList.contains("is-open")) {
+        light.hidden = true;
+      }
+    }, 1700);
+  });
 
   showWalkCue(function () {
     walkAcross({ dir: "left", lettering: MBL_GLASS, silhouette: true, dest: "../", flag: "se-walk" });

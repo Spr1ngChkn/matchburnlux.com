@@ -66,6 +66,14 @@
     window.setTimeout(phrase, 1500);
   }
 
+  document.addEventListener("door-close", function () {
+    window.setTimeout(function () {
+      if (!door.classList.contains("is-open")) {
+        garden.hidden = true;
+      }
+    }, 1900);
+  });
+
   document.addEventListener("sm-enter", startFlute);
   document.addEventListener("sm-door-open", function () {
     openDoor();
