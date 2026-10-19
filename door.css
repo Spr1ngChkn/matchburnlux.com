@@ -499,17 +499,6 @@ body {
   transition: opacity 400ms ease, visibility 0s linear 400ms;
 }
 
-/* On wider screens the knock note sits to the right of the door, on every
-   door in the hallway (owner, 2026-10-18). */
-@media (min-width: 40rem) {
-  .knock-notice {
-    left: calc(50% + var(--door-w) / 2 + 1.4rem);
-    width: min(16rem, calc(50% - var(--door-w) / 2 - 3rem));
-    transform: none;
-    text-align: left;
-  }
-}
-
 .knock-notice.is-shown {
   opacity: 1;
   visibility: visible;
@@ -1703,4 +1692,70 @@ body {
 .door-close:focus-visible {
   border-color: #fff;
   color: #fff;
+}
+
+/* Knock notes (owner, 2026-10-18): MBL's sits centred just above the glass
+   and points down at it; SE's sits left of the door and points right; Silver
+   Monkey's sits right of the door and points left. */
+.knock-notice::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.5rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--kn-bg, rgb(11, 9, 7));
+  border: solid var(--kn-line, var(--orange));
+  border-width: 0 var(--kn-w, 1px) var(--kn-w, 1px) 0;
+  transform: translateX(-50%) rotate(45deg);
+}
+.door-page:not(.se-page):not(.sm-page) .knock-notice,
+body:not(.door-page) .knock-notice {
+  top: auto;
+  bottom: calc(var(--floor-h) + var(--door-w) * 1.6);
+}
+.se-page .knock-notice {
+  --kn-bg: rgb(22, 12, 40);
+  --kn-line: var(--se-purple);
+  --kn-w: 2px;
+}
+.sm-page .knock-notice {
+  --kn-bg: rgb(34, 38, 112);
+  --kn-line: var(--sm-silver);
+  --kn-w: 2px;
+}
+@media (min-width: 40rem) {
+  .se-page .knock-notice,
+  .sm-page .knock-notice {
+    width: min(16rem, calc(50% - var(--door-w) / 2 - 3rem));
+    transform: none;
+    text-align: left;
+  }
+  .se-page .knock-notice {
+    left: auto;
+    right: calc(50% + var(--door-w) / 2 + 1.4rem);
+  }
+  .sm-page .knock-notice {
+    left: calc(50% + var(--door-w) / 2 + 1.4rem);
+    width: min(21rem, calc(50% - var(--door-w) / 2 - 3rem));
+  }
+  .se-page .knock-notice::after {
+    left: auto;
+    right: -0.5rem;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+  .sm-page .knock-notice::after {
+    left: -0.5rem;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) rotate(135deg);
+  }
+}
+@media (max-width: 39.99rem) {
+  .se-page .knock-notice::after,
+  .sm-page .knock-notice::after {
+    display: none;
+  }
 }

@@ -1035,6 +1035,33 @@ var Hallway = (function () {
     });
   }
 
+  // Tapping anywhere off the door clears whatever is showing, one layer at a
+  // time: the open card or plate first, then the knock note and the info card
+  // under the door (owner, 2026-10-18).
+  document.addEventListener("click", function (e) {
+    if (busy) {
+      return;
+    }
+    var t = e.target;
+    if (!(t instanceof Element) ||
+        t.closest(".door:not(.door-ghost), .door-panel.is-open, .appointment-plate.is-open, .walk-cue, .door-close, .site-footer, .entry-gate")) {
+      return;
+    }
+    if (card.classList.contains("is-open")) {
+      closeCard();
+    } else if (brochure.classList.contains("is-open")) {
+      closeBrochure();
+    } else if (plate.classList.contains("is-open")) {
+      closeAppointment();
+    } else {
+      hideNotice();
+      lowerPanel.classList.remove("is-delivering");
+      if (underDoor) {
+        underDoor.classList.remove("is-out");
+      }
+    }
+  });
+
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") {
       return;
@@ -1045,6 +1072,11 @@ var Hallway = (function () {
       closeBrochure();
     } else if (plate.classList.contains("is-open")) {
       closeAppointment();
+    } else {
+      hideNotice();
+      if (underDoor) {
+        underDoor.classList.remove("is-out");
+      }
     }
   });
 

@@ -468,3 +468,21 @@ body.page.sm-sheet {
   font-size: 1.3rem;
   margin: 2rem 0 3rem;
 }
+
+/* The info card slides out on the left under this door (owner, 2026-10-18). */
+.door-page.sm-page .under-door-floor .under-door {
+  left: 46%;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0 7%, transparent 7% 100%),
+    linear-gradient(180deg, #2f35a0, var(--sm-indigo) 55%, var(--sm-indigo-deep));
+  color: var(--sm-silver);
+  outline: 1px solid rgba(223, 227, 234, 0.75);
+  transform: translate(-50%, -100%) rotateX(45deg) rotateZ(30deg);
+}
+.door-page.sm-page .under-door-floor .under-door.is-out {
+  transform: translate(-50%, -22%) rotateX(45deg) rotateZ(30deg);
+}
+.sm-page .under-door .sm-booklet-monkey {
+  width: 40%;
+  filter: none;
+}
