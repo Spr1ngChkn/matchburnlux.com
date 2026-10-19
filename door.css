@@ -499,6 +499,17 @@ body {
   transition: opacity 400ms ease, visibility 0s linear 400ms;
 }
 
+/* On wider screens the knock note sits to the right of the door, on every
+   door in the hallway (owner, 2026-10-18). */
+@media (min-width: 40rem) {
+  .knock-notice {
+    left: calc(50% + var(--door-w) / 2 + 1.4rem);
+    width: min(16rem, calc(50% - var(--door-w) / 2 - 3rem));
+    transform: none;
+    text-align: left;
+  }
+}
+
 .knock-notice.is-shown {
   opacity: 1;
   visibility: visible;

@@ -172,29 +172,6 @@
   border: 2px solid var(--sm-silver);
   color: var(--sm-silver);
 }
-/* The glass-knock note pops out to the left (toward the bamboo) and points there. */
-@media (min-width: 40rem) {
-  .sm-page .knock-notice {
-    left: auto;
-    right: calc(50% + var(--door-w) / 2 + 1.4rem);
-    width: min(16rem, calc(50% - var(--door-w) / 2 - 3rem));
-    transform: none;
-    text-align: left;
-  }
-}
-.sm-page .knock-notice::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -0.75rem;
-  width: 1.1rem;
-  height: 1.1rem;
-  transform: translateY(-50%) rotate(45deg);
-  background: rgba(36, 41, 125, 0.98);
-  border-left: 2px solid var(--sm-silver);
-  border-bottom: 2px solid var(--sm-silver);
-}
-
 .sm-page .note-card {
   background: linear-gradient(160deg, #262b84, var(--sm-indigo-deep) 70%);
   color: #e9ecf3;
