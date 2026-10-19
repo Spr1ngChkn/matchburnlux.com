@@ -7,9 +7,11 @@ if (window.location.protocol === "http:" && !/^(127\.0\.0\.1|localhost)$/.test(w
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 var SE_DOOR = document.body && document.body.getAttribute("data-door") === "se";
+var SM_DOOR = document.body && document.body.getAttribute("data-door") === "sm";
+var SIDE_DOOR = SE_DOOR || SM_DOOR;
 var DOOR_BASE = (document.currentScript && document.currentScript.src.replace(/door\.js(\?.*)?$/, "")) || "";
 
-function showWalkCue(onWalk, side) {
+function showWalkCue(onWalk, side, label) {
   var left = side === "left";
   var hallway = document.querySelector(".hallway");
   if (!hallway || hallway.querySelector(left ? ".walk-cue--left" : ".walk-cue:not(.walk-cue--left)")) {
@@ -18,7 +20,7 @@ function showWalkCue(onWalk, side) {
   var cue = document.createElement("button");
   cue.type = "button";
   cue.className = left ? "walk-cue walk-cue--left" : "walk-cue";
-  cue.setAttribute("aria-label", left ? "Walk back up the hall" : "Walk on down the hall");
+  cue.setAttribute("aria-label", label || (left ? "Walk back up the hall" : "Walk on down the hall"));
   var icon = document.createElement("img");
   icon.className = "walk-cue-icon";
   icon.src = DOOR_BASE + (left ? "img/walk-left.svg" : "img/walk.svg");
@@ -89,7 +91,7 @@ function walkAcross(o) {
       if (lettering) {
         lettering.innerHTML = o.lettering;
       }
-      if (o.dir === "right" && glass && !glass.querySelector(".tv-glow")) {
+      if (o.glow && glass && !glass.querySelector(".tv-glow")) {
         var glow = document.createElement("div");
         glow.className = "tv-glow";
         glow.innerHTML = "<span></span><span></span><span></span><span></span>";
@@ -120,6 +122,7 @@ var MBL_GLASS = '<div class="glass-top"><h1 class="wordmark"><span class="wordma
   '<span class="wordmark-line wordmark-line--lux gold-leaf">LUX</span></h1>' +
   '<p class="gold-leaf glass-above">Creative Consultant</p></div><hr class="glass-line">' +
   '<div class="glass-bottom"><p class="gold-leaf glass-below">Technical Services</p></div>';
+var SM_GLASS = '<div class="glass-top"><img class="sm-glass-logo" src="' + DOOR_BASE + 'img/sm-medallion-silver.png" alt=""></div>';
 
 var Hallway = (function () {
   "use strict";
@@ -495,6 +498,94 @@ var Hallway = (function () {
     p.distanceFilter.frequency.exponentialRampToValueAtTime(BEHIND_DOOR_CUTOFF, now + secs);
   }
 
+  // Silver Monkey: a struck gong. Inharmonic partials, each fading at its own rate.
+  function gong(opts) {
+    if (!ready()) {
+      return;
+    }
+    var base = opts.freq || 98;
+    var t0 = ctx.currentTime + (opts.delay || 0);
+    var peak = opts.gain || 0.2;
+    var send = ctx.createGain();
+    send.gain.value = 0.5;
+    send.connect(room());
+    [[1, 1, 6.5], [1.48, 0.6, 5], [2.08, 0.45, 4], [2.67, 0.3, 3.2], [3.6, 0.2, 2.4], [4.4, 0.12, 1.8]].forEach(function (p) {
+      var osc = ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(base * p[0] * 1.004, t0);
+      osc.frequency.exponentialRampToValueAtTime(base * p[0], t0 + 1.2);
+      var g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(peak * p[1], t0 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + p[2]);
+      osc.connect(g);
+      g.connect(master);
+      g.connect(send);
+      osc.start(t0);
+      osc.stop(t0 + p[2] + 0.05);
+    });
+    burst({ duration: 0.06, filterType: "lowpass", freq: 600, gain: peak * 0.6, delay: opts.delay || 0, toRoom: 0.3 });
+  }
+
+  // Silver Monkey: one breathy flute note (a soft triangle, vibrato, breath noise).
+  function flute(opts) {
+    if (!ready()) {
+      return;
+    }
+    var f = opts.freq || 440;
+    var dur = opts.duration || 1.2;
+    var t0 = ctx.currentTime + (opts.delay || 0);
+    var peak = opts.gain || 0.05;
+    var osc = ctx.createOscillator();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(opts.from || f, t0);
+    if (opts.from) {
+      osc.frequency.exponentialRampToValueAtTime(f, t0 + 0.12);
+    }
+    var lfo = ctx.createOscillator();
+    lfo.frequency.value = 5.2;
+    var depth = ctx.createGain();
+    depth.gain.setValueAtTime(0, t0);
+    depth.gain.linearRampToValueAtTime(f * 0.007, t0 + Math.min(0.6, dur * 0.5));
+    lfo.connect(depth);
+    depth.connect(osc.frequency);
+    var tone = ctx.createBiquadFilter();
+    tone.type = "lowpass";
+    tone.frequency.value = f * 3;
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(peak, t0 + 0.12);
+    g.gain.setValueAtTime(peak, t0 + Math.max(0.13, dur - 0.35));
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(tone);
+    tone.connect(g);
+    var air = ctx.createBufferSource();
+    air.buffer = noiseBuffer(dur + 0.05);
+    var airF = ctx.createBiquadFilter();
+    airF.type = "bandpass";
+    airF.frequency.value = f * 2;
+    airF.Q.value = 1.5;
+    var airG = ctx.createGain();
+    airG.gain.setValueAtTime(0.0001, t0);
+    airG.gain.exponentialRampToValueAtTime(peak * 0.35, t0 + 0.06);
+    airG.gain.exponentialRampToValueAtTime(peak * 0.12, t0 + 0.3);
+    airG.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    air.connect(airF);
+    airF.connect(airG);
+    airG.connect(g);
+    g.connect(master);
+    var send = ctx.createGain();
+    send.gain.value = 0.55;
+    g.connect(send);
+    send.connect(room());
+    osc.start(t0);
+    lfo.start(t0);
+    air.start(t0);
+    osc.stop(t0 + dur + 0.05);
+    lfo.stop(t0 + dur + 0.05);
+    air.stop(t0 + dur + 0.05);
+  }
+
   function playVoice(name) {
   }
 
@@ -514,6 +605,8 @@ var Hallway = (function () {
     burst: function (o) { return burst(loud(o)); },
     tone: function (o) { return tone(loud(o)); },
     sweep: function (o) { return sweep(loud(o)); },
+    gong: function (o) { return gong(o); },
+    flute: function (o) { return flute(o); },
     footsteps: footsteps,
     phonographArrive: phonographArrive,
     playVoice: playVoice,
@@ -608,7 +701,7 @@ var Hallway = (function () {
   handle.removeAttribute("aria-hidden");
   handle.setAttribute("role", "button");
   handle.setAttribute("tabindex", "0");
-  handle.setAttribute("aria-label", SE_DOOR ? "Open the door" : "Try the handle: by appointment only");
+  handle.setAttribute("aria-label", SIDE_DOOR ? "Open the door" : "Try the handle: by appointment only");
 
   function anyPanelOpen() {
     return card.classList.contains("is-open") || brochure.classList.contains("is-open");
@@ -673,6 +766,12 @@ var Hallway = (function () {
 
     [45, 342, 639].forEach(function (t, k) {
       var d = pause(t) / 1000;
+      if (SM_DOOR) {
+        if (k === 0) {
+          Hallway.gong({ freq: 98, gain: 0.22, delay: d });
+        }
+        return;
+      }
       if (SE_DOOR) {
         Hallway.burst({ duration: 0.04, filterType: "lowpass", freq: 700, gain: 0.22, delay: d, toRoom: 0.1 });
         Hallway.tone({ freq: [660, 880, 1320][k], type: "square", duration: 0.07, gain: 0.04, delay: d + 0.02 });
@@ -694,7 +793,9 @@ var Hallway = (function () {
       } else if (underDoor) {
         underDoor.classList.add("is-out");
         Hallway.sweep({ duration: 0.7, from: 1200, to: 2600, gain: 0.14 });
-        Hallway.playVoice("take-a-number");
+        if (!SM_DOOR) {
+          Hallway.playVoice("take-a-number");
+        }
       }
       doorSlab.classList.remove("is-knocking");
       busy = false;
@@ -759,6 +860,18 @@ var Hallway = (function () {
 
   function openAppointment() {
     if (busy) {
+      return;
+    }
+    if (SM_DOOR) {
+      if (anyPanelOpen()) {
+        closeCard();
+        closeBrochure();
+      }
+      Hallway.burst({ duration: 0.04, filterType: "lowpass", freq: 500, gain: 0.1 });
+      [523, 659, 784, 1047].forEach(function (f, k) {
+        Hallway.tone({ freq: f, type: "sine", duration: 1.6, gain: 0.04, delay: 0.3 + k * 0.22 });
+      });
+      document.dispatchEvent(new CustomEvent("sm-door-open"));
       return;
     }
     if (SE_DOOR) {
@@ -863,7 +976,7 @@ var Hallway = (function () {
         window.setTimeout(function () {
           closeAppointment();
           showWalkCue(function () {
-            walkAcross({ dir: "right", lettering: SE_GLASS, dest: "Spr1ngChknEnt/", flag: "mbl-walk" });
+            walkAcross({ dir: "right", lettering: SE_GLASS, glow: true, dest: "Spr1ngChknEnt/", flag: "mbl-walk" });
           });
         }, 900);
         return true;
@@ -1004,13 +1117,16 @@ var Hallway = (function () {
 
   var walkedIn = false;
   try {
-    walkedIn = SE_DOOR && sessionStorage.getItem("mbl-walk") === "1";
+    walkedIn = (SE_DOOR && sessionStorage.getItem("mbl-walk") === "1") ||
+               (SM_DOOR && sessionStorage.getItem("mbl-walk-left") === "1");
     sessionStorage.removeItem("mbl-walk");
+    sessionStorage.removeItem("mbl-walk-left");
   } catch (err) {  }
   var walkedBack = false;
   try {
-    walkedBack = !SE_DOOR && sessionStorage.getItem("se-walk") === "1";
+    walkedBack = !SIDE_DOOR && (sessionStorage.getItem("se-walk") === "1" || sessionStorage.getItem("sm-walk") === "1");
     sessionStorage.removeItem("se-walk");
+    sessionStorage.removeItem("sm-walk");
   } catch (err) {  }
   if (walkedBack) {
     var wakeBack = function () {
@@ -1027,12 +1143,12 @@ var Hallway = (function () {
   }
   if (walkedIn) {
     document.addEventListener("DOMContentLoaded", function () {
-      document.dispatchEvent(new CustomEvent("se-enter"));
+      document.dispatchEvent(new CustomEvent(SM_DOOR ? "sm-enter" : "se-enter"));
     });
     var wake = function () {
       Hallway.unlock();
-      if (!document.querySelector(".radio.is-on")) {
-        document.dispatchEvent(new CustomEvent("se-enter"));
+      if (SM_DOOR || !document.querySelector(".radio.is-on")) {
+        document.dispatchEvent(new CustomEvent(SM_DOOR ? "sm-enter" : "se-enter"));
       }
       document.removeEventListener("pointerdown", wake, true);
       document.removeEventListener("keydown", wake, true);
@@ -1052,11 +1168,11 @@ var Hallway = (function () {
     }
     opened = true;
     Hallway.unlock();
-    if (SE_DOOR) {
-      document.dispatchEvent(new CustomEvent("se-enter"));
+    if (SIDE_DOOR) {
+      document.dispatchEvent(new CustomEvent(SM_DOOR ? "sm-enter" : "se-enter"));
     }
-    var walkMs = SE_DOOR ? ARRIVAL_MS : (Hallway.footsteps(ARRIVAL_MS) || ARRIVAL_MS);
-    if (!SE_DOOR) {
+    var walkMs = SIDE_DOOR ? ARRIVAL_MS : (Hallway.footsteps(ARRIVAL_MS) || ARRIVAL_MS);
+    if (!SIDE_DOOR) {
       Hallway.phonographArrive(ARRIVAL_MS);
     }
 
@@ -1089,7 +1205,11 @@ var Hallway = (function () {
 
 (function () {
   "use strict";
-  var zones = SE_DOOR ? [
+  var zones = SM_DOOR ? [
+    [".knock-zone--high", DOOR_BASE + "img/sm-gong.svg", "touch-fist"],
+    [".knock-zone--low", DOOR_BASE + "img/sm-scroll.svg", "touch-letter"],
+    [".handle", DOOR_BASE + "img/sm-key.svg", "touch-key"]
+  ] : SE_DOOR ? [
     [".knock-zone--high", DOOR_BASE + "img/se-gamepad.svg", "touch-fist"],
     [".knock-zone--low", DOOR_BASE + "img/se-chat.svg", "touch-letter"],
     [".handle", DOOR_BASE + "img/se-power.svg", "touch-key"]
@@ -1117,4 +1237,15 @@ var Hallway = (function () {
       window.setTimeout(function () { img.remove(); }, 900);
     });
   });
+})();
+
+(function () {
+  "use strict";
+  // Nature first: Silver Monkey is the first door up the hall, left of Matchburn LUX.
+  if (SIDE_DOOR || !document.querySelector(".hallway")) {
+    return;
+  }
+  showWalkCue(function () {
+    walkAcross({ dir: "left", lettering: SM_GLASS, dest: DOOR_BASE + "SilverMonkey/", flag: "mbl-walk-left" });
+  }, "left", "Walk up the hall to Silver Monkey");
 })();

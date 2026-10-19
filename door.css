@@ -1583,3 +1583,41 @@ body {
 .glass-lettering {
   --u: calc(var(--door-w) / 100 * 0.82);
 }
+
+/* Silver Monkey door (left of MBL): silver leaf, indigo glass. Shared here so
+   the ghost door on the MBL walk renders without sm.css. */
+.silver-leaf {
+  color: #dfe3ea;
+  filter: drop-shadow(0 calc(var(--u) * 0.3) 0 rgba(8, 10, 30, 0.85))
+          drop-shadow(0 0 calc(var(--u) * 2) rgba(190, 205, 255, 0.30));
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .silver-leaf {
+    background: linear-gradient(to bottom,
+                #ffffff 0%, #d7dbe2 35%, #8d939e 55%, #eef1f5 75%, #a3a9b4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+.sm-glass-logo {
+  display: block;
+  width: 94%;
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 calc(var(--u) * 0.3) 0 rgba(8, 10, 40, 0.7))
+          drop-shadow(0 0 calc(var(--u) * 1.8) rgba(200, 215, 255, 0.45));
+}
+.door-ghost .glass:has(.sm-glass-logo) {
+  background: radial-gradient(ellipse at 50% 40%, #6c7fc4 0%, #3b4a94 55%, #232c6a 100%);
+}
+.door-ghost .silver-leaf.ghost-name {
+  color: #e4e8ef;
+  font-size: calc(var(--u) * 7);
+  letter-spacing: 0.04em;
+  filter: drop-shadow(0 0 calc(var(--u) * 1.5) rgba(200, 210, 255, 0.5));
+}
+.door-ghost .glass-top:has(.sm-glass-logo) {
+  grid-row: 1 / -1;
+  align-self: center;
+}

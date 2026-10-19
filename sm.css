@@ -1,0 +1,529 @@
+/* Silver Monkey: the first door up the hall, left of Matchburn LUX.
+   Same building; its own face. Natural oak, pewter hardware, indigo glass
+   lettered in silver leaf (from the medallion), moonlight instead of lamplight. */
+.sm-page,
+.sm-sheet {
+  --sm-indigo: #2b3190;
+  --sm-indigo-deep: #12153f;
+  --sm-silver: #dfe3ea;
+  --sm-jade: #9cc7b4;
+
+  --wood-dark:  #2a2116;
+  --wood:       #5a4830;
+  --wood-light: #87704c;
+
+  --brass-hi: #f4f6f9;
+  --brass:    #a9afb8;
+  --brass-lo: #474c55;
+
+  --gold: #cfd5df;
+}
+
+.sm-page .lamp {
+  background: radial-gradient(ellipse 55% 45% at 50% 0%,
+              rgba(190, 205, 255, 0.20) 0%,
+              rgba(190, 205, 255, 0.06) 45%,
+              transparent 75%);
+}
+
+.sm-page .door:not(.door-ghost) .glass {
+  background: radial-gradient(ellipse at 50% 40%, #6c7fc4 0%, #3b4a94 55%, #232c6a 100%);
+}
+/* A faint yin-yang turning slowly behind the frosted glass. */
+.sm-yinyang {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140%;
+  aspect-ratio: 1;
+  margin-left: -70%;
+  transform: translateY(-50%);
+  background: url("img/sm-yinyang.svg") center / contain no-repeat;
+  opacity: 0.24;
+  filter: blur(calc(var(--u) * 2.2));
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sm-yinyang {
+    animation: sm-turn 48s linear infinite;
+  }
+}
+@keyframes sm-turn {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to   { transform: translateY(-50%) rotate(360deg); }
+}
+.sm-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.sm-page .door:not(.door-ghost) .glass-lettering {
+  padding-top: 0;
+}
+.sm-page .door:not(.door-ghost) .glass-top {
+  grid-row: 1 / -1;
+  align-self: center;
+}
+
+/* Bamboo by the frame: nature first. */
+.sm-bamboo {
+  position: absolute;
+  left: calc(50% - var(--door-w) / 2 - var(--u) * 26);
+  bottom: var(--floor-h);
+  width: calc(var(--u) * 18);
+  height: calc(var(--door-w) * 1.9);
+  pointer-events: none;
+  z-index: 0;
+}
+.sm-bamboo span {
+  position: absolute;
+  bottom: calc(var(--u) * 7);
+  width: calc(var(--u) * 2.4);
+  border-radius: calc(var(--u) * 1);
+  background:
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--u) * 15), rgba(0, 0, 0, 0.45) calc(var(--u) * 15) calc(var(--u) * 15.8)),
+    linear-gradient(90deg, #2f4a2c, #6f8f55 45%, #3c5a35);
+  transform-origin: bottom center;
+}
+.sm-bamboo span:nth-child(1) { left: 20%; height: 92%; transform: rotate(-3deg); }
+.sm-bamboo span:nth-child(2) { left: 45%; height: 100%; transform: rotate(1.5deg); }
+.sm-bamboo span:nth-child(3) { left: 68%; height: 78%; transform: rotate(4deg); }
+.sm-bamboo i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--u) * 9);
+  border-radius: 0 0 calc(var(--u) * 3) calc(var(--u) * 3);
+  background: linear-gradient(180deg, #3a3f4a, #1d2027);
+  box-shadow: inset 0 calc(var(--u) * 0.6) 0 rgba(255, 255, 255, 0.12);
+}
+@media (max-width: 40rem) {
+  .sm-bamboo { display: none; }
+}
+
+/* The door swings in, like the SE door. */
+.sm-page .door-frame {
+  perspective: calc(var(--u) * 160);
+}
+.sm-page .door-slab {
+  position: relative;
+  z-index: 1;
+  transform-origin: left center;
+  transform-style: flat;
+  transition: transform 1.8s cubic-bezier(0.35, 0, 0.2, 1), opacity 0.6s ease 1.4s;
+}
+.sm-page .door.is-open .door-slab {
+  transform: rotateY(96deg);
+  transform-style: preserve-3d;
+  opacity: 0;
+  pointer-events: none;
+}
+.sm-page .door.is-open .door-slab,
+.sm-page .door.is-open .door-slab > :not(.slab-edge) {
+  backface-visibility: hidden;
+}
+.sm-page .slab-edge {
+  background: linear-gradient(90deg, #6b5838, #4a3b25 45%, #2a2116);
+}
+.sm-page .door::before {
+  transition: opacity 0.8s ease;
+}
+.sm-page .door.is-open::before {
+  opacity: 0;
+}
+
+/* Behind the door: morning mist. */
+.sm-garden {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 3);
+  padding: calc(var(--u) * 5);
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(156, 199, 180, 0.45), transparent 70%),
+    linear-gradient(180deg, #e9eef6 0%, #c9d6e6 55%, #a9c3b8 100%);
+  box-shadow: 0 0 calc(var(--u) * 40) calc(var(--u) * 10) rgba(200, 215, 240, 0.4);
+  color: var(--sm-indigo-deep);
+}
+.sm-garden[hidden] {
+  display: none;
+}
+.sm-garden-logo {
+  width: calc(var(--u) * 46);
+  height: auto;
+  border-radius: 50%;
+  filter: drop-shadow(0 calc(var(--u) * 1) calc(var(--u) * 3) rgba(18, 21, 63, 0.35));
+}
+.sm-garden-soon {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(var(--u) * 7);
+  letter-spacing: 0.04em;
+  color: var(--sm-indigo);
+}
+.sm-garden-line {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(var(--u) * 3.8);
+  letter-spacing: 0.08em;
+}
+.sm-garden-mail {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(var(--u) * 3.6);
+  color: var(--sm-indigo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sm-page .knock-zone {
+    cursor: url("img/sm-gong.svg") 16 17, pointer;
+  }
+  .sm-page .knock-zone--low {
+    cursor: url("img/sm-scroll.svg") 16 16, pointer;
+  }
+  .sm-page.js .handle,
+  .js .sm-page .handle {
+    cursor: url("img/sm-key.svg") 16 16, pointer;
+  }
+}
+
+.sm-page .under-door {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0 6%, transparent 6% 100%),
+    var(--sm-indigo);
+  color: var(--sm-silver);
+  outline: 1px solid rgba(223, 227, 234, 0.6);
+}
+
+.sm-page .knock-notice {
+  background: linear-gradient(160deg, rgba(43, 49, 144, 0.95), rgba(18, 21, 63, 0.95));
+  border: 2px solid var(--sm-silver);
+  color: var(--sm-silver);
+}
+/* The glass-knock note pops out to the left (toward the bamboo) and points there. */
+@media (min-width: 40rem) {
+  .sm-page .knock-notice {
+    left: auto;
+    right: calc(50% + var(--door-w) / 2 + 1.4rem);
+    width: min(16rem, calc(50% - var(--door-w) / 2 - 3rem));
+    transform: none;
+    text-align: left;
+  }
+}
+.sm-page .knock-notice::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -0.75rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  transform: translateY(-50%) rotate(45deg);
+  background: rgba(36, 41, 125, 0.98);
+  border-left: 2px solid var(--sm-silver);
+  border-bottom: 2px solid var(--sm-silver);
+}
+
+.sm-page .note-card {
+  background: linear-gradient(160deg, #262b84, var(--sm-indigo-deep) 70%);
+  color: #e9ecf3;
+  border: 2px solid var(--sm-silver);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.75);
+}
+.sm-page .note-title {
+  color: var(--sm-silver);
+  font-family: Georgia, "Times New Roman", serif;
+}
+.sm-page .info-logo {
+  border-radius: 50%;
+}
+.sm-page .info-lead {
+  color: var(--sm-jade);
+}
+.sm-page .sm-name {
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.sm-page .sm-schedule-link a {
+  font-size: 1.15em;
+  letter-spacing: 0.06em;
+}
+.sm-page .sm-helos abbr {
+  text-decoration: none;
+  letter-spacing: 0.3em;
+  color: var(--sm-silver);
+}
+.sm-page .sm-helos-list {
+  list-style: none;
+  margin: 0.2rem auto 0.8rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem 0.9rem;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.sm-page .sm-helos-list b {
+  color: var(--sm-jade);
+}
+.sm-page .note-card a,
+.sm-page .contact-card a {
+  color: var(--sm-jade);
+}
+.sm-page .note-card .panel-close {
+  border-color: var(--sm-silver);
+  color: var(--sm-silver);
+}
+
+.sm-page .contact-card {
+  --card: var(--sm-indigo-deep);
+  --card-ink: #e9ecf3;
+  --card-accent: var(--sm-jade);
+  background: linear-gradient(160deg, #262b84, var(--sm-indigo-deep) 70%);
+  border: 2px solid var(--sm-silver);
+}
+.sm-page .card-name {
+  color: var(--sm-silver);
+  font-family: Georgia, "Times New Roman", serif;
+}
+.sm-page .card-greeting,
+.sm-page .card-services {
+  color: var(--sm-jade);
+}
+.sm-page .contact-card .line {
+  display: block;
+}
+.sm-page .card-message textarea,
+.sm-page .card-message input[type="email"] {
+  background: #0e1033;
+  color: #e9ecf3;
+  border: 1px solid var(--sm-silver);
+}
+.sm-page .card-message button {
+  background: #0e1033;
+  color: var(--sm-silver);
+  border-color: var(--sm-silver);
+}
+.sm-page .panel-x {
+  color: var(--sm-silver);
+}
+.sm-page .sm-card-logo {
+  width: auto;
+  height: 96px;
+  border-radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sm-page .door-slab {
+    transition-duration: 0.3s;
+  }
+}
+
+/* Cool frost for the blue glass (MBL's frost is warm). */
+.sm-page .door:not(.door-ghost) .glass-frost {
+  background:
+    repeating-radial-gradient(circle at 20% 30%, rgba(220, 230, 255, 0.07) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(45deg,  rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 20, 0.06) 0 1px, transparent 1px 5px),
+    linear-gradient(160deg, rgba(225, 235, 255, 0.28), rgba(170, 190, 240, 0.10) 45%, rgba(10, 15, 50, 0.28));
+}
+
+/* Pewter hardware: knob and kick plate, to go with the silver glass. */
+.sm-page .handle::before {
+  background: radial-gradient(circle at 35% 30%,
+              #ffffff 0 8%, #c9ced6 30%, #7d838d 70%, #3a3e45 100%);
+  box-shadow:
+    calc(var(--u) * -1) calc(var(--u) * 1.5) calc(var(--u) * 3) rgba(0, 0, 0, 0.7),
+    0 0 calc(var(--u) * 3) rgba(190, 205, 255, 0.25);
+}
+.sm-page .door-slab::after {
+  background:
+    radial-gradient(circle at calc(var(--u) * 3) calc(var(--u) * 3), #2a2d33 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    radial-gradient(circle at calc(100% - var(--u) * 3) calc(var(--u) * 3), #2a2d33 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    radial-gradient(circle at calc(var(--u) * 3) calc(100% - var(--u) * 3), #2a2d33 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    radial-gradient(circle at calc(100% - var(--u) * 3) calc(100% - var(--u) * 3), #2a2d33 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    repeating-linear-gradient(100deg, rgba(0, 0, 0, 0.12) 0 1px, transparent 1px 9px),
+    linear-gradient(to bottom, #6f747c 0%, #a3a9b2 35%, #5b6068 70%, #b4bac3 100%);
+}
+
+/* Class Schedule page (SilverMonkey/classes/) */
+body.page.sm-sheet {
+  background: radial-gradient(ellipse at 50% 0%, #1d2260 0%, var(--sm-indigo-deep) 55%, #07081c 100%);
+}
+.sm-sheet .page-top a,
+.sm-sheet .sheet a,
+.sm-sheet .site-footer a {
+  color: var(--sm-jade);
+}
+.sm-sheet .sheet {
+  background: rgba(18, 21, 63, 0.92);
+  border-color: var(--sm-silver);
+  color: #e9ecf3;
+  text-align: left;
+}
+.sm-sheet .sheet h1,
+.sm-sheet .sheet h2 {
+  color: var(--sm-silver);
+  font-family: Georgia, "Times New Roman", serif;
+}
+.sm-sheet .byline {
+  color: var(--sm-jade);
+}
+.sm-sheet .sm-sheet-logo {
+  display: block;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+}
+.sm-sheet .sm-slot {
+  margin: 1rem 0 1.4rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(223, 227, 234, 0.45);
+  border-radius: 0.4rem;
+  background: rgba(43, 49, 144, 0.35);
+}
+.sm-sheet .sm-slot p { margin: 0 0 0.5rem; }
+.sm-sheet .sm-slot p:last-child { margin-bottom: 0; }
+.sm-sheet .sm-when {
+  font-size: 1.2rem;
+  color: var(--sm-silver);
+  letter-spacing: 0.04em;
+}
+.sm-sheet .sm-ask {
+  display: inline-block;
+  margin-top: 0.3rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--sm-jade);
+  border-radius: 0.3rem;
+  text-decoration: none;
+}
+.sm-sheet .sm-ask:hover,
+.sm-sheet .sm-ask:focus-visible {
+  background: rgba(156, 199, 180, 0.15);
+}
+
+/* Rounded cards, logo in the top-left corner (owner, 2026-10-18) */
+.sm-page .note-card,
+.js .sm-page .door-panel.note-card,
+.sm-sheet .sheet {
+  border-radius: 1.1rem;
+}
+.sm-page .note-card .info-logo {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+}
+/* Schedule page: the monkey and potion alone, top right */
+.sm-sheet .sm-sheet-logo {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  width: auto;
+  height: 160px;
+  margin: 0;
+  border-radius: 0;
+}
+.sm-page .note-card {
+  padding-top: 1.6rem;
+}
+.sm-sheet .sheet {
+  position: relative;
+}
+.sm-sheet .sheet h1 {
+  margin-top: 3.4rem;
+}
+@media (max-width: 40rem) {
+  .sm-page .note-card .note-title {
+    margin-top: 2.6rem;
+  }
+}
+.sm-page .note-card .sm-info-monkey {
+  width: auto;
+  height: 76px;
+  border-radius: 0;
+}
+@media (max-width: 40rem) {
+  .sm-sheet .sm-sheet-logo {
+    height: 120px;
+  }
+  .sm-sheet .sheet h1 {
+    margin-top: 7.2rem;
+  }
+}
+/* The monkey sits on the right everywhere (owner, 2026-10-18), so the
+   info card's Close moves to the left. */
+.sm-page .note-card .panel-close {
+  margin-left: 0;
+  margin-right: auto;
+}
+@media (max-width: 40rem) {
+  html.js body.sm-page .contact-card.door-panel {
+    padding-bottom: 6.2rem;
+  }
+  .sm-page .card-privacy {
+    left: 1rem;
+    width: calc(100% - 7.5rem);
+    transform: none;
+    text-align: left;
+  }
+  .sm-page .sm-card-logo {
+    height: 80px;
+  }
+}
+
+/* H.E.L.O.S. category pages (SilverMonkey/herbs/ … salves/) */
+.sm-sheet .sm-helos-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0.4rem 0 1.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+}
+.sm-sheet .sm-cat {
+  scroll-margin-top: 1rem;
+}
+.sm-sheet .sm-soon {
+  color: var(--sm-jade);
+  font-style: italic;
+}
+.sm-sheet .sm-product h3 {
+  margin: 0 0 0.2rem;
+  color: var(--sm-silver);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+}
+.sm-sheet .sm-price {
+  font-size: 1.2rem;
+  color: var(--sm-jade);
+}
+.sm-sheet .sm-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 0.6rem;
+  margin: 0.8rem 0 1rem;
+}
+.sm-sheet .sm-gallery img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(223, 227, 234, 0.35);
+}
+.sm-sheet .sm-fine {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+.sm-sheet .sm-coming {
+  font-size: 1.3rem;
+  margin: 2rem 0 3rem;
+}
