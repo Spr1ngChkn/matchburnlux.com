@@ -252,19 +252,6 @@
 .se-page .door.is-open .door-slab > :not(.slab-edge) {
   backface-visibility: hidden;
 }
-.slab-edge {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 100%;
-  width: calc(var(--u) * 3.2);
-  transform-origin: left center;
-  transform: rotateY(90deg);
-  background: linear-gradient(90deg, #5a3a20, #3b2412 45%, #24150a);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-}
-
 .se-page .contact-card .line {
   display: block;
   white-space: nowrap;

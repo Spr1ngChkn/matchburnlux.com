@@ -1760,3 +1760,17 @@ body:not(.door-page) .knock-notice {
 @media (max-width: 40rem) {
   .sm-bamboo { left: calc(50% - var(--door-w) / 2 - var(--u) * 13); }
 }
+
+/* The door's edge, seen when a side door swings open (SE and SM). */
+.slab-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: calc(var(--u) * 3.2);
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, #5a3a20, #3b2412 45%, #24150a);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
