@@ -6,6 +6,13 @@
   --se-orange: #ff8a2a;
 }
 
+/* Copper hardware: knob, mail slot and kick plate (owner, 2026-10-18). */
+.se-page .door {
+  --brass-hi: #ffc9a3;
+  --brass:    #c46a3c;
+  --brass-lo: #5c2410;
+}
+
 .se-page .door:not(.door-ghost) .wordmark-line {
   font-size: 1em;
 }
@@ -313,4 +320,18 @@
 @media (max-width: 30rem) {
   .site-footer .radio { max-width: calc(100vw - 24px); box-sizing: border-box; }
   .site-footer .radio-volume { display: none; }
+}
+
+.se-page .handle::before {
+  background: radial-gradient(circle at 35% 30%,
+              #ffe3cc 0 8%, #e08a55 30%, #9a4a22 70%, #4a1d0a 100%);
+}
+.se-page .door-slab::after {
+  background:
+    radial-gradient(circle at calc(var(--u) * 3) calc(var(--u) * 3), #3a1708 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    radial-gradient(circle at calc(100% - var(--u) * 3) calc(var(--u) * 3), #3a1708 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    radial-gradient(circle at calc(var(--u) * 3) calc(100% - var(--u) * 3), #3a1708 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    radial-gradient(circle at calc(100% - var(--u) * 3) calc(100% - var(--u) * 3), #3a1708 0 calc(var(--u) * 0.7), transparent calc(var(--u) * 0.8)),
+    repeating-linear-gradient(100deg, rgba(0, 0, 0, 0.12) 0 1px, transparent 1px 9px),
+    linear-gradient(to bottom, #8a3f1c 0%, #d9824f 35%, #7a3415 70%, #e3946a 100%);
 }
