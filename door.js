@@ -55,7 +55,8 @@ function showWalkCue(onWalk, side, label, again) {
   cue.addEventListener("pointerup", go);
   cue.addEventListener("click", function () { go(null); });
   window.setTimeout(function () { cue.classList.add("is-shown"); }, 50);
-  if (left) {
+  // Both cues fade to a faint figure and come up on hover (owner, 2026-10-18).
+  {
     var idleTimer = window.setTimeout(function () { cue.classList.add("is-idle"); }, 3000);
     cue.addEventListener("pointerenter", function () {
       window.clearTimeout(idleTimer);
@@ -971,12 +972,8 @@ var Hallway = (function () {
         refuse();
         return;
       }
-      var DOWN_THE_HALL = "dcdb6f8f6ee863d915d6f56f0d932b66cc0ae57bc15785f67b39c1a8635a74cf";
       var typed = tried.trim().toLowerCase();
-      sha256Hex(typed).then(function (hall) {
-        if (hall === DOWN_THE_HALL) {
-          return true;
-        }
+      Promise.resolve().then(function () {
         if (!window.Matchbook) {
           return false;
         }
@@ -993,20 +990,7 @@ var Hallway = (function () {
           return "file";
         });
       }).then(function (hall) {
-        if (hall === "file") {
-          return true;
-        }
-        if (hall !== true) {
-          return false;
-        }
-        plateRefusal.textContent = "Down the hall.";
-        window.setTimeout(function () {
-          closeAppointment();
-          showWalkCue(function () {
-            walkAcross({ dir: "right", lettering: SE_GLASS, glow: true, dest: "Spr1ngChknEnt/", flag: "mbl-walk" });
-          });
-        }, 900);
-        return true;
+        return hall === "file";
       }).then(function (walked) {
         if (walked) {
           return null;
@@ -1307,6 +1291,11 @@ var Hallway = (function () {
   showWalkCue(function () {
     walkAcross({ dir: "left", lettering: SM_GLASS, bamboo: true, dest: DOOR_BASE + "SilverMonkey/", flag: "mbl-walk-left" });
   }, "left", "Walk up the hall to Silver Monkey");
+  // No passcode for Spr1ngChkn Enterprises any more (owner, 2026-10-18): the
+  // walking figure on the right wall is always there.
+  showWalkCue(function () {
+    walkAcross({ dir: "right", lettering: SE_GLASS, glow: true, dest: DOOR_BASE + "Spr1ngChknEnt/", flag: "mbl-walk" });
+  }, "right", "Walk down the hall to Spr1ngChkn Enterprises");
 })();
 
 // Close the door again on the side doors (owner, 2026-10-18).
