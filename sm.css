@@ -486,3 +486,104 @@ body.page.sm-sheet {
   width: 40%;
   filter: none;
 }
+
+/* Liniments: title centered in the space left of the monkey, no byline,
+   product name and price centered (owner markup, 2026-10-21). */
+.sm-sheet .sheet.sm-head-center h1 {
+  margin: 3.2rem 150px 4.2rem 0;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+.sm-sheet .sm-head-center .sm-product h3,
+.sm-sheet .sm-head-center .sm-product .sm-price {
+  text-align: center;
+}
+@media (max-width: 40rem) {
+  .sm-sheet .sheet.sm-head-center h1 {
+    margin: 1.2rem 110px 3.4rem 0;
+  }
+}
+
+/* Liniments photos (owner markup, 2026-10-21): 1 the box alone up top;
+   2 the bottle and 3 the label stacked beside the Ask button; 4 the tilted
+   bottle large on the right. */
+.sm-sheet .sm-head-center .sm-gallery img,
+.sm-sheet .sm-foot-row img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 3px solid var(--sm-jade);
+}
+.sm-sheet .sm-head-center .sm-gallery-top {
+  grid-template-columns: 1fr;
+  max-width: 26rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.sm-sheet .sm-head-center .sm-gallery-top img {
+  height: 20rem;
+}
+.sm-sheet .sm-foot-row {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr 1.8fr;
+  gap: 0.8rem;
+  align-items: end;
+  margin-top: 0.8rem;
+}
+.sm-sheet .sm-foot-stack {
+  display: grid;
+  gap: 0.6rem;
+}
+.sm-sheet .sm-foot-stack img { height: 8rem; }
+.sm-sheet .sm-foot-text .sm-ask { white-space: nowrap; }
+.sm-sheet .sm-foot-text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sm-sheet .sm-wedge {
+  position: relative;
+  height: 16.6rem;
+  overflow: hidden;
+  border: 3px solid var(--sm-jade);
+  border-radius: 0.5rem;
+  background: var(--sm-jade);
+}
+/* Two wedges split corner to corner, bottom left to top right (owner,
+   2026-10-22); the jade background shows through as the seam. */
+.sm-sheet .sm-wedge > div {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.sm-sheet .sm-wedge-top {
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 0 calc(100% - 5px));
+}
+.sm-sheet .sm-wedge-bottom {
+  clip-path: polygon(100% 5px, 100% 100%, 5px 100%);
+}
+.sm-sheet .sm-foot-row .sm-wedge img {
+  display: block;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+/* each wedge photo is pre-cropped so its subject sits in its own triangle */
+@media (max-width: 40rem) {
+  .sm-sheet .sm-head-center .sm-gallery-top img { height: 16rem; }
+  .sm-sheet .sm-foot-row { grid-template-columns: 1fr; }
+  .sm-sheet .sm-foot-stack { grid-template-columns: 1fr 1fr; }
+  .sm-sheet .sm-foot-stack img { height: 10rem; }
+  .sm-sheet .sm-wedge { height: 16rem; }
+}
+/* The class schedule keeps its "· Tai Chi" byline, centered under the title. */
+.sm-sheet .sheet.sm-head-center h1 + .byline {
+  margin: -3.6rem 150px 3rem 0;
+  text-align: center;
+}
+@media (max-width: 40rem) {
+  .sm-sheet .sheet.sm-head-center h1 + .byline {
+    margin: -2.8rem 110px 2.4rem 0;
+  }
+}
