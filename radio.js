@@ -5,12 +5,15 @@
   var radio = document.querySelector(".radio");
   if (!radio) { return; }
 
-  var STREAMS = [
-    "https://ice2.somafm.com/secretagent-128-mp3",
-    "https://ice6.somafm.com/secretagent-128-mp3",
-    "https://ice5.somafm.com/secretagent-128-mp3"
+  // Spr1ngChkn Originals: homemade spy-jazz, served from this site (no third-party stream).
+  var TRACKS = [
+    { file: "audio/trench-coat-shuffle", title: "Trench Coat Shuffle" },
+    { file: "audio/midnight-in-the-hallway", title: "Midnight in the Hallway" }
   ];
-  var SONGS = "https://somafm.com/songs/secretagent.json";
+  var EXT = (function () {
+    var a = document.createElement("audio");
+    return a.canPlayType && a.canPlayType('audio/ogg; codecs="vorbis"') ? ".ogg" : ".mp3";
+  })();
   var VOLUME = 0.25;
   var FADE_MS = 1500;
 
@@ -20,7 +23,6 @@
   var nowEl = radio.querySelector(".radio-now");
   var audio = null;
   var which = 0;
-  var pollTimer = null;
   var fadeTimer = null;
 
   function setNow(text) {
@@ -41,51 +43,38 @@
     }, 40);
   }
 
-  function pollSong() {
-    if (!window.fetch) { return; }
-    fetch(SONGS, { cache: "no-store" }).then(function (r) {
-      return r.ok ? r.json() : null;
-    }).then(function (data) {
-      var s = data && data.songs && data.songs[0];
-      if (s && audio && !audio.paused) {
-        setNow(s.artist + " — " + s.title);
-      }
-    }).catch(function () {  });
+  function load(i) {
+    which = (i + TRACKS.length) % TRACKS.length;
+    audio.src = TRACKS[which].file + EXT;
+    setNow("Spr1ngChkn Originals — " + TRACKS[which].title);
   }
 
   function play() {
     if (!audio) {
       audio = new Audio();
       audio.preload = "none";
-      audio.addEventListener("error", function () {
-        which += 1;
-        if (which < STREAMS.length) {
-          audio.src = STREAMS[which];
-          audio.play().catch(function () {});
-        } else {
-          which = 0;
-          setNow("The station isn't answering. Try again in a moment.");
-          stopped();
-        }
+      audio.addEventListener("ended", function () {
+        load(which + 1);
+        audio.play().catch(function () {});
       });
+      audio.addEventListener("error", function () {
+        setNow("The radio is warming up. Try again in a moment.");
+        stopped();
+      });
+      load(Math.floor(Math.random() * TRACKS.length));
     }
-    audio.src = STREAMS[which];
     audio.volume = 0;
-    setNow("Tuning in…");
     audio.play().then(function () {
       fadeTo(slider ? Number(slider.value) : VOLUME);
       playBtn.hidden = true;
       stopBtn.hidden = false;
       radio.classList.add("is-on");
-      pollSong();
-      pollTimer = window.setInterval(pollSong, 30000);
     }).catch(function () {
       setNow("Press play to tune in.");
     });
   }
 
   function stopped() {
-    window.clearInterval(pollTimer);
     playBtn.hidden = false;
     stopBtn.hidden = true;
     radio.classList.remove("is-on");
@@ -95,9 +84,7 @@
     if (!audio) { return; }
     fadeTo(0, function () {
       audio.pause();
-      audio.removeAttribute("src");
-      audio.load();
-      setNow("Secret Agent, on SomaFM");
+      setNow("Spr1ngChkn Originals");
       stopped();
     });
   }

@@ -31,7 +31,6 @@
 
   var POWERED = [
     { name: "Anthropic", href: "https://www.anthropic.com/" },
-    { name: "SomaFM", href: "https://somafm.com/secretagent/" },
     { name: "Intel", href: "https://www.intel.com/" },
     { name: "NVIDIA", href: "https://www.nvidia.com/" },
     { name: "MSI", href: "https://www.msi.com/" },
