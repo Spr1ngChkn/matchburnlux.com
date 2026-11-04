@@ -28,6 +28,33 @@
 
     <div class="log-list">
 
+      <article class="log-entry" data-date="2026-11-04">
+        <p class="log-head">[2026-11-04] <span class="ok">200 OK</span> dev.log: the library clone</p>
+        <p>A whole public research library copied overnight onto the office's own storage, so it outlives any one server: decades of patents, papers and firsthand accounts on innovative, suppressed and longshot technology.</p>
+        <ul class="log-stats">
+          <li><code>wget --mirror</code> with offline link conversion and a one-second randomized wait between requests: 25,370 files and 14 GB in 8 hours, about 5&frac12; minutes of actual transfer</li>
+          <li>polite by design: the site's rules read first, nothing behind a login, a light load on their server</li>
+          <li>it lands in quarantine; nothing gets opened until the office's security reviewer has scanned it</li>
+          <li>next: indexed for search by a local AI model, nothing sent to the cloud</li>
+          <li>one bug caught: the watcher waiting on the job matched its own command line in <code>pgrep -f</code> and kept saying "still running" after the copy had finished; the fix is to watch the PID</li>
+          <li>one lesson logged: size a job before starting it</li>
+        </ul>
+      </article>
+
+      <article class="log-entry" data-date="2026-10-18">
+        <p class="log-head">[2026-10-18] <span class="ok">200 OK</span> dev.log: a third door</p>
+        <p>The hallway grew a door. Silver Monkey opened up the hall from Matchburn LUX: nature first, with indigo glass, pewter hardware and bamboo by the frame. Then a long polish pass over all three doors so the building feels like one building.</p>
+        <ul class="log-stats">
+          <li>a new door page, a class schedule and one page per product line, all static, same-origin only, no trackers</li>
+          <li>a flute that plays in the browser (Web Audio, synthesized, nothing to license): soft in the hallway, fuller when the door opens</li>
+          <li>a ghost door and its bamboo walk in together; the browser's Back button now resets the hallway instead of freezing mid-stride</li>
+          <li>tap anywhere off the door to clear a pop-up; Esc does the same; side doors close again</li>
+          <li>one shared layout bug found and fixed: a hidden edge piece styled for one door was squashing another door's panel; all three now match to the pixel</li>
+          <li>product photos re-encoded with their location metadata stripped before going public</li>
+          <li>every push checked first by the office's security reviewer</li>
+        </ul>
+      </article>
+
       <article class="log-entry" data-date="2026-10-16">
         <p class="log-head">[2026-10-16] <span class="ok">200 OK</span> dev.log: root access</p>
         <p>The workstation moved house. The daily driver is now Linux (Ubuntu LTS) on its own encrypted drive, with the old OS kept on the boot menu for games and creative work. The first day was spent at the shell: <code>sudo</code>, <code>apt</code>, process tables, and getting the office's AI assistant to live on the new machine.</p>
