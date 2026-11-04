@@ -1441,7 +1441,7 @@ body {
   }
 }
 .walk-cue.is-shown.is-idle {
-  opacity: 0;              
+  opacity: 0.35;   /* faint, never invisible: phones have no hover to bring it back (11-04) */
 }
 
 .under-door {
