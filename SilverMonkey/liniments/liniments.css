@@ -1,0 +1,45 @@
+/* A1: text column left, box hero right, four products in an even strip below. */
+html::before, html::after { display: none; } /* film flicker/grain overlay caused the dark band */
+.lx { color: #e9ecf3; }
+.lx a { color: var(--sm-jade); }
+.lx-main { max-width: 72rem; margin: 0 auto; padding: 3rem 1rem 2rem; }
+.lx-grid {
+  display: grid; gap: 1.2rem; align-items: start;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "ti ti ti ti ti he he he he he he he"
+    "co co co co co he he he he he he he"
+    "no no no no no he he he he he he he"
+    "b  b  b  b  b  .  fi fi fi fi fi fi";
+}
+.lx-title { grid-area: ti; }
+.lx-copy  { grid-area: co; line-height: 1.55; }
+.lx-note  { grid-area: no; }
+.lx-fine  { grid-area: fi; }
+.lx-hero  { grid-area: he; align-self: center; }
+.lx-i1 { grid-area: b; } .lx-i2 { grid-area: sf; } .lx-i3 { grid-area: la; } .lx-i4 { grid-area: sz; }
+
+.lx-tb { box-sizing: border-box; width: 100%; padding: 1rem 1.2rem; border: 0; background: none; padding-left: 0; }
+.lx-tb p { margin: 0 0 0.7rem; }
+.lx-tb p:last-child { margin-bottom: 0; }
+.lx-title h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 3.4rem; letter-spacing: 0.08em; color: var(--sm-silver); }
+.lx-title h2 { margin: 0.5rem 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.9rem; color: var(--sm-silver); }
+.lx-title .sm-price { margin: 0.3rem 0 0; font-size: 1.7rem; color: var(--sm-jade); }
+
+.lx-img { display: block; width: 100%; height: auto; align-self: center; background: none; border: 0; border-radius: 0;
+  filter: drop-shadow(0 0.8rem 1rem rgba(0, 0, 0, 0.55)); }
+.lx-hero { filter: drop-shadow(0 1.2rem 1.6rem rgba(0, 0, 0, 0.6)) drop-shadow(0 0 2.5rem rgba(190, 205, 255, 0.25)); }
+.lx-disc { margin-top: 2rem; text-align: center; }
+.lx .sm-ask { display: inline-block; padding: 0.45rem 0.9rem; border: 1px solid var(--sm-jade); border-radius: 0.3rem; text-decoration: none; }
+
+@media (max-width: 48rem) {
+  .lx-grid { grid-template-columns: 1fr 1fr; grid-template-areas: none; }
+  .lx-grid > * { grid-area: auto; }
+  .lx-title, .lx-copy, .lx-note, .lx-fine, .lx-hero { grid-column: 1 / 3; }
+  .lx-hero { width: 90%; justify-self: center; }
+  .lx-title h1 { font-size: 1.9rem; }
+}
+
+.lx-hero { margin-left: -2rem; }
+.lx-fine { align-self: center; }
+@media (max-width: 48rem) { .lx-hero { margin-left: 0; } }
