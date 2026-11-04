@@ -41,7 +41,7 @@ body {
   background: var(--ink);
   color: var(--gold);
   
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace;
 }
 
 .hallway {
@@ -679,15 +679,15 @@ body {
 }
 
 .card-message { margin: 0 0 0.6em; display: flex; flex-direction: column; align-items: center; gap: 0.4em; text-align: center; }
-.card-message label { font-family: "Courier New", Courier, monospace; font-size: 0.85em; letter-spacing: 0.08em; text-transform: uppercase; }
+.card-message label { font-family: "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace; font-size: 0.85em; letter-spacing: 0.08em; text-transform: uppercase; }
 .card-message textarea {
-  width: 100%; font-family: "Courier New", Courier, monospace; font-size: 0.9em;
+  width: 100%; font-family: "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace; font-size: 0.9em;
   background: #f4ead6; color: #1a1411; border: 1px solid #8a6a3e; border-radius: 2px;
   padding: 0.5em; resize: vertical; min-height: 3.8em;
 }
 .card-message textarea:focus-visible { outline: 2px solid #ffb35c; outline-offset: 1px; }
 .card-message button {
-  align-self: center; font-family: "Courier New", Courier, monospace; font-weight: 700;
+  align-self: center; font-family: "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace; font-weight: 700;
   background: #1a1411; color: #ffb35c; border: 1px solid #ffb35c; padding: 0.35em 0.9em; cursor: pointer;
 }
 .card-message button:focus-visible { outline: 2px solid #ffb35c; outline-offset: 2px; }
@@ -863,7 +863,7 @@ body {
     linear-gradient(180deg, transparent 0 62%, var(--brass) 62% 70%, transparent 70%), 
     var(--card, #efe4cc);
   color: var(--wood-dark);
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace;
   font-weight: bold;
   font-size: calc(var(--u) * 4.2);
   letter-spacing: 0.25em;
@@ -1100,7 +1100,7 @@ body {
   border: 0;
   background: #000;
   color: rgba(217, 173, 72, 0.7);
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace;
   font-size: 0.85rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1394,7 +1394,7 @@ body {
   justify-content: flex-end;
   background: linear-gradient(90deg, transparent, rgba(255, 170, 90, 0.10));
   color: rgba(255, 190, 120, 0.85);
-  font: bold 3rem/1 "Courier New", Courier, monospace;
+  font: bold 3rem/1 "Courier New", Courier, "Nimbus Mono PS", "Courier 10 Pitch", monospace;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.8s ease;

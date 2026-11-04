@@ -129,19 +129,19 @@
 }
 .sm-garden-soon {
   margin: 0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: calc(var(--u) * 7);
   letter-spacing: 0.04em;
   color: var(--sm-indigo);
 }
 .sm-garden-line {
   margin: 0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: calc(var(--u) * 3.8);
   letter-spacing: 0.08em;
 }
 .sm-garden-mail {
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: calc(var(--u) * 3.6);
   color: var(--sm-indigo);
 }
@@ -180,7 +180,7 @@
 }
 .sm-page .note-title {
   color: var(--sm-silver);
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
 }
 .sm-page .info-logo {
   border-radius: 50%;
@@ -209,7 +209,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.3rem 0.9rem;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
 }
 .sm-page .sm-helos-list b {
   color: var(--sm-jade);
@@ -232,7 +232,7 @@
 }
 .sm-page .card-name {
   color: var(--sm-silver);
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
 }
 .sm-page .card-greeting,
 .sm-page .card-services {
@@ -312,7 +312,7 @@ body.page.sm-sheet {
 .sm-sheet .sheet h1,
 .sm-sheet .sheet h2 {
   color: var(--sm-silver);
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
 }
 .sm-sheet .byline {
   color: var(--sm-jade);
@@ -427,7 +427,7 @@ body.page.sm-sheet {
   flex-wrap: wrap;
   gap: 0.4rem 1.2rem;
   margin: 0.4rem 0 1.6rem;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 1.1rem;
 }
 .sm-sheet .sm-cat {
@@ -440,7 +440,7 @@ body.page.sm-sheet {
 .sm-sheet .sm-product h3 {
   margin: 0 0 0.2rem;
   color: var(--sm-silver);
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 1.4rem;
 }
 .sm-sheet .sm-price {
