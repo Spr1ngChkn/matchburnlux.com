@@ -7,9 +7,9 @@ html::before, html::after { display: none; } /* film flicker/grain overlay cause
   display: grid; gap: 1.2rem; align-items: start;
   grid-template-columns: repeat(12, 1fr);
   grid-template-areas:
-    "ti ti ti ti ti he he he he he he he"
-    "co co co co co he he he he he he he"
-    "no no no no no he he he he he he he"
+    "he he he he he he he ti ti ti ti ti"
+    "he he he he he he he co co co co co"
+    "he he he he he he he no no no no no"
     "b  b  b  b  b  .  fi fi fi fi fi fi";
 }
 .lx-title { grid-area: ti; }
@@ -40,6 +40,6 @@ html::before, html::after { display: none; } /* film flicker/grain overlay cause
   .lx-title h1 { font-size: 1.9rem; }
 }
 
-.lx-hero { margin-left: -2rem; }
+.lx-hero { margin-right: -2rem; }
 .lx-fine { align-self: center; }
 @media (max-width: 48rem) { .lx-hero { margin-left: 0; } }
