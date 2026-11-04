@@ -1819,3 +1819,13 @@ body.door-page:not(.se-page):not(.sm-page) .note-card {
 body.door-page:not(.se-page):not(.sm-page) .note-card {
   width: min(29rem, calc(100% - 32px));
 }
+
+/* The MBL match on the glass, under the gold line (owner, 2026-11-04). */
+.glass-match {
+  display: block;
+  width: calc(var(--u) * 14);
+  height: auto;
+  margin: calc(var(--u) * 1.5) auto 0;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 calc(var(--u) * 0.6) rgba(232, 169, 72, 0.35));
+}
